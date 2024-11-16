@@ -1,12 +1,15 @@
-<?php 
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'demo');
- 
-$link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
- 
-if($link === false){
-    die("ERROR: No se pudo conectar" . mysqli_connect_error());
-}
-?>
+<?php
+require '../../frontend/php/conexion.php';
+
+$logo = $_GET['Logo'];
+$nombre = $_GET['Nombre'];
+$descripcion = $_GET['Descripcion'];
+$direccion = $_GET['Direccion'];
+$email = $_GET['Email'];
+$telefono = $_GET['Telefono'];
+
+$sql = "UPDATE empresa SET Nombre=?, Descripcion=?, Direccion=?, Email=?, Telefono=? WHERE Logo=?";
+
+$res = $con->prepare($sql);
+$res->execute([$nombre,$descripcion,$direccion,$email,$telefono,$logo]);
+header('Location: ../pages/main.html');

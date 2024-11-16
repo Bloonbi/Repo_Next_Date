@@ -1,5 +1,5 @@
 <?php
-include "conexion.php";
+require '../../frontend/php/conexion.php';
 
 $nombre = $_GET["nombre"];
 $descripcion = $_GET["descripcion"];
@@ -16,7 +16,7 @@ try {
     $res->execute([$nombre, $descripcion, $precio, $cantidad, $fecha_creacion, $fecha_vencimiento]);
 
     echo "Producto agregado correctamente.<br>";
-    echo "<a href='../index.html'>Volver</a>";
+    echo "<a href='../pages/main.html'>Volver</a>";
 } catch(PDOException $error) {
     header("location:../pages/error.html");
     die();

@@ -34,5 +34,33 @@
 
 
 <script src="vistas/js/search.js"></script>
+
+
+
+<div class="contenedor">
+
+
+
+
+
+
+<?php
+require "conexion.php";
+
+$res = $con ->query('SELECT * FROM producto');
+
+
+while($reg = $res->fetch()){ ?>
+
+    <div class="tarjeta">
+    <img class="img" src="../vistas/img/Producto/<?=$reg[0]?>.jpg">    
+    
+    <?=$reg[0] . "-". $reg[1]?></div><br>
+
+<?php
+}
+?>
+</div>
+
 </body>
 </html>
