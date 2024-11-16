@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Formulario Registro</title>
+  <link rel="stylesheet" href="../vistas/css/login-register-style.css">
+</head>
+<body>
+  <section class="form-register">
+    <h5>Formulario Registro</h5>
+    <form method="POST" action="../php/register.php">
+      <input class="controls" type="text" name="nombre" placeholder="Nombre" required>
+      <input class="controls" type="email" name="email" placeholder="Email" required>
+      <input class="controls" type="password" name="password" placeholder="Contraseña" required>
+      <input class="controls" type="text" name="telefono" placeholder="Teléfono" required>
+      <input class="controls" type="text" name="direccion" placeholder="Dirección" required>
+      <input class="buttons" type="submit" value="Registrar">
+    </form>
+  </section>
+</body>
+</html>

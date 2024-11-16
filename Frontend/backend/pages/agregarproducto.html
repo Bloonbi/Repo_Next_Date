@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Producto</title>
+</head>
+<body>
+    <h2>Formulario para agregar Producto</h2>
+    <form action="../php/agregarproducto.php" method="GET">
+        <label for="nombre">Nombre:</label><br>
+        <input type="text" id="nombre" name="nombre" required><br>
+
+        <label for="descripcion">Descripción:</label><br>
+        <input type="text" id="descripcion" name="descripcion"><br>
+
+        <label for="precio">Precio:</label><br>
+        <input type="number" id="precio" name="precio" required><br>
+
+        <label for="cantidad">Cantidad:</label><br>
+        <input type="number" id="cantidad" name="cantidad" required><br>
+
+        <label for="fecha_creacion">Fecha de Creación:</label><br>
+        <input type="date" id="fecha_creacion" name="fecha_creacion" required><br>
+
+        <label for="fecha_vencimiento">Fecha de Vencimiento:</label><br>
+        <input type="date" id="fecha_vencimiento" name="fecha_vencimiento" required><br>
+
+        <input type="submit" value="Agregar Producto">
+    </form>
+</body>
+</html>
