@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 header('Content-Type: application/json');
 include '../controlador/conexion.php';
 
@@ -21,6 +20,7 @@ $password = $_POST['password'] ?? null;
             //if (password_verify($password, $admins['password'])) {
                 // Store user data in the session
                 $_SESSION['admins'] = $admins;
+                $_SESSION['admins'] = true;
                 echo json_encode(['success' => 'exitoso', 'user' => $admins, 'session' => true]);
         //    } else {
          //       echo json_encode(['error' => 'Usuario o contraseña incorrectos']);
