@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($user && password_verify($password, $user['Password'])) {
         session_start();
         $_SESSION['cliente'] = $user['Nombre'];
-        $_SESSION['idc'] = $user['Id_Cliente'];
         echo json_encode(['success' => 'Usuario creado correctamente', 'cliente' => $user]);
 
     } else {

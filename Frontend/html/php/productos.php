@@ -19,7 +19,7 @@ $all_product = $con->query($sql);
     ?>
  <main>
     <?php
-    if($row = ($all_product)){
+    while($row = ($)){
         ?>
         <div class="card">
             <div class="img">
@@ -29,13 +29,13 @@ $all_product = $con->query($sql);
                 <p class="product_na"><?php echo $row ["Nombre"];?></p>
                 <p class="price"><b><?php echo $row ["Descripcion"]?></b></p>
                 <p class="cantidad"><del><?php echo $row ["Precio"]?></del></p>
-                <button class="add">Añadir al Carrito</button> 
+                <button class="add">Añadir al Carrito</button>
             </div>
         </div>
         <?php
-       } else {
+        else {
         echo "No se encontraron productos.";
-    }
+    }}
     ?>
     </main>
 </body>

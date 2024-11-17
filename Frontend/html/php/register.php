@@ -1,4 +1,34 @@
 <?php
+/*
+session_start();    
+require 'conexion.php';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Obtiene y limpia los datos del formulario
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $address = $_POST['address'];
+    $phone = $_POST['phone'];
+    $date = date('Y-m-d');
+
+    // Hashea la contraseña
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    // Prepara la consulta
+    $stmt = $con->prepare('INSERT INTO cliente (Nombre, Email, Password, Direccion, Telefono, Fecha_registro) VALUES (?, ?, ?, ?, ?, ?)');
+
+    // Ejecuta la consulta
+    if ($stmt->execute()) {
+        echo 'success';
+    } else {
+        echo 'Failed to register: ' . $stmt->error;
+    }
+
+    // Cierra la consulta
+    $stmt->close();
+}*/
+
 session_start();
 header('Content-Type: application/json');
 include "conexion.php";
@@ -41,8 +71,7 @@ $date = date('Y-m-d');
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $_SESSION['cliente'] = $user['Nombre'];
-        $_SESSION['idc'] = $user['Id_Cliente'];
+        $_SESSION['cliente'] = $user;
         echo json_encode(['success' => 'Usuario creado correctamente', 'user' => $user]);
     } catch (PDOException $e) {
         echo json_encode(['error' => 'Error en la consulta: ' . $e->getMessage()]);
