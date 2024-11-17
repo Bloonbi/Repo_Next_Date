@@ -1,7 +1,7 @@
 <?php
 $usuario_db = 'root';
 $contrasena_db = '';
-$dbname = 'cafee';
+$dbname = 'cafeteria';
 $host = 'localhost';
 
 try {
