@@ -1,19 +1,46 @@
 <?php
 session_start();
-
-require "conexion.php";
+require "conexion.php"; 
 
 $idcliente = $_SESSION['idc'];
 
-$sql = "SELECT Password FROM cliente WHERE Id_Cliente = :idc";
-        $stmt = $con->prepare($sql);
-        $stmt->bindParam(':idc' , $idcliente);
-        $stmt->execute();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Obtener la contraseña actual desde la base de datos
+    $sql = "SELECT Password FROM cliente WHERE Id_Cliente = :idc";
+    $stmt = $con->prepare($sql);
+    $stmt->bindParam(':idc', $idcliente);
+    $stmt->execute();
+    $ContraseñaCliente = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    if (!$ContraseñaCliente) {
+        echo json_encode(array('error' => 'Cliente no encontrado.'));
+        exit;
+    }
 
-        $ContraseñaCliente = $stmt->fetch(PDO::FETCH_ASSOC);
+    $currentPasswordHash = $ContraseñaCliente['Password'];
 
+    // Obtener la contraseña actual y nueva desde el formulario
+    $contrasenaActual = $_POST['contrasenaActual'];
+    $nuevaContrasena = $_POST['nuevaContrasena'];
 
-        echo json_encode($ContraseñaCliente, JSON_PRETTY_PRINT);
-   
+    // Validar la contraseña actual
+    if (!password_verify($contrasenaActual, $currentPasswordHash)) {
+        echo json_encode(array('error' => 'La contraseña actual es incorrecta.'));
+        exit;
+    }
+
+    // Hashear la nueva contraseña
+    $NuevaContraseña = password_hash($nuevaContrasena, PASSWORD_BCRYPT);
+
+    // Actualizar la contraseña en la base de datos
+    $updateStmt = $con->prepare("UPDATE cliente SET Password = :Password WHERE Id_Cliente = :idc");
+    $updateStmt->bindParam(':Password', $NuevaContraseña);
+    $updateStmt->bindParam(':idc', $idcliente);
+
+    if ($updateStmt->execute()) {
+        echo json_encode(array('success' => 'Contraseña actualizada correctamente.'));
+    } else {
+        echo json_encode(array('error' => 'Error al actualizar la contraseña.'));
+    }
+}
 ?>

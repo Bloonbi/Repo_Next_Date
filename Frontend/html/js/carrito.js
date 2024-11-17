@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", async() =>{
         div.innerHTML = prod;
       })
       .catch((error) => {
+
         console.error("Error", error);
       })
     });

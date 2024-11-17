@@ -1,38 +1,34 @@
-const actu = document.getElementById ("botonContraseña");
+document.getElementById('actualizarForm').addEventListener('submit', function(event) {
+  event.preventDefault();
 
-actu.addEventListener("click", () =>{
+  const contrasenaActual = document.getElementById('contrasenaActual').value;
+  const nuevaContrasena = document.getElementById('nuevaContrasena').value;
+  const confirmarContrasena = document.getElementById('confirmarContrasena').value;
 
+  if (nuevaContrasena !== confirmarContrasena) {
+      alert('Las contraseñas nuevas no coinciden.');
+      return;
+  }
 
-    const contraseñaActual = document.getElementById("contraseñaActual").value;
-    const contraseñaNueva = document.getElementById("contraseñaNueva").value;
-    const confirmarContraseña = document.getElementById("confirtmarContraseña").value;
+  const formData = new FormData();
+  formData.append('contrasenaActual', contrasenaActual);
+  formData.append('nuevaContrasena', nuevaContrasena);
 
-
-    const formData = new FormData();
-
-  formData.append('contraseñaActual', contraseñaActual);
-  formData.append('contraseñaNueva', contraseñaNueva);
-  formData.append('confirmarContraseña', confirmarContraseña);
-
-
-
-    fetch("./php/cargarcontraseña.php", {
+  fetch( './php/cargarcontraseña.php', { 
       method: 'POST',
       body: formData
-
-    })
-    
-    .then((response) => response.json())
-          
-    .then((data) => { 
-      alert(data.message);
-
-
-    })
-    .catch((error) => {
-      console.error("Error", error);
-    })
-
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.success) {
+          alert(data.success);
+          // Redirigir o realizar alguna acción después de actualizar la contraseña
+      } else {
+          alert(data.error);
+      }
+  })
+  .catch(error => {
+      console.error('Error:', error);
+      alert('Hubo un problema al actualizar la contraseña.');
   });
-
-  
+});

@@ -1,6 +1,32 @@
 const boton = document.getElementById("buscar-btn");
 const producto = document.getElementById("buscar-producto");
 const div = document.getElementById("galeria");
+const botoncarrito = document.getElementById("botoncarrito");
+
+
+botoncarrito.addEventListener("click", function(){
+  
+  fetch("./php/validar.php")
+  .then((response) => response.json())
+     
+
+  .then((data) => { 
+
+    if (data.success == false){
+      alert("Debes iniciar sesion para ir al carrito.")
+    }else{
+      window.location.href="../html/carrito.html"
+    }
+
+    console.log(data) 
+
+   })
+  .catch((error) => {
+    console.error("Error", error);
+  });
+
+})
+
 
  
 
@@ -91,7 +117,9 @@ div.addEventListener("click", function(event) {
  
      })
      .catch((error) => {
-       console.error("Error", error);
+       console.error("Error",
+        alert ("Necesitas iniciar sesion para poder comprar un producto."),
+        error);
      });
 
   }

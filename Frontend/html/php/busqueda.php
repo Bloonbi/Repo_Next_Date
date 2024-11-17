@@ -6,7 +6,7 @@ if (isset($_GET['producto'])) {
     $nombreProducto = $_GET['producto'];
     try {
 
-
+        
         $sql = "SELECT * FROM producto WHERE Nombre LIKE :nombre";
         $stmt = $con->prepare($sql);
         $stmt->execute(['nombre' => "%$nombreProducto%"]);
@@ -26,4 +26,5 @@ if (isset($_GET['producto'])) {
 } else {
     echo json_encode(["error" =>  "Debe ingresar un nombre de producto."]);
 }
+
 ?>

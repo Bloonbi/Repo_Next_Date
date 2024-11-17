@@ -1,36 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Actualizar Contraseña</title>
 </head>
 <body>
-   
-    
-    <form >
-        <div class="form-group">
-            <label for="contraseñaActual">Contraseña Actual</label>
-            <input type="password" class="form-control" id="contraseñaActual"/>
-          </div>
+    <h1>Actualizar Contraseña</h1>
+    <form id="actualizarForm">
+        <label for="contrasenaActual">Contraseña Actual:</label>
+        <input type="password" id="contrasenaActual" required><br><br>
+        
+        <label for="nuevaContrasena">Nueva Contraseña:</label>
+        <input type="password" id="nuevaContrasena" required><br><br>
 
-          <div class="form-group">
-            <label for="contraseñaNueva">Contraseña Nueva</label>
-            <input type="password" class="form-control" id="contraseñaNueva"/>
-          </div>
+        <label for="confirmarContrasena">Confirmar Nueva Contraseña:</label>
+        <input type="password" id="confirmarContrasena" required><br><br>
 
-          <div class="form-group">
-            <label for="confirtmarContraseña">Confirmar Contraseña Nueva</label>
-            <input type="password" class="form-control" id="confirtmarContraseña"/>
-          </div>
-      
-
-        <button class="btn btn-primary" id="botonContraseña">
-          Cambiar Contraseña.
-        </button>
-      </form>
-
-<script src="../html/js/contraseña.js"></script>
-
-</body>
+        <button type="submit">Actualizar Contraseña</button>
+    </form>
+    <script src="../html/js/contraseña.js"></script> </body>
 </html>
