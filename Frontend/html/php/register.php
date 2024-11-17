@@ -26,7 +26,7 @@ $date = date('Y-m-d');
 
     try {
         // Insert Cliente into the database
-        $stmt = $con->prepare("INSERT INTO cliente (Nombre, Email, Password, Direccion, Telefono, Fecha_registro) VALUES (:nombre, :email, :password, :address, :phone, :date)");
+        $stmt = $con->prepare("INSERT INTO cliente (Nombre, Email, Password, Direccion, Telefono, fchReg) VALUES (:nombre, :email, :password, :address, :phone, :date)");
         $stmt->bindParam(':nombre', $name);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $password_hashed);

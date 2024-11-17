@@ -2,7 +2,41 @@ const boton = document.getElementById("buscar-btn");
 const producto = document.getElementById("buscar-producto");
 const div = document.getElementById("galeria");
 const botoncarrito = document.getElementById("botoncarrito");
+const galeria = document.getElementById("galeria");
 
+
+
+
+
+document.addEventListener("DOMContentLoaded", function (page=1) {
+  fetch(`/cafee/backend/serv_admin/listar_productosfront.php?page=${page}`)
+    .then(response => response.json())
+    .then((data) => {
+      console.log(data)
+
+    //Exito, Construccion de objetos
+        galeria.innerHTML = '';
+        data.producto.forEach(product => {
+            const productElement = document.createElement('div');
+            productElement.classList.add('product');
+            productElement.innerHTML = `
+                <h3>${product.nombre}</h3>
+                <p>${product.descripcion}</p>
+                <p>Precio: $${product.precio}</p>
+                <p>Cantidad: ${product.cantidad}</p>
+                <img src="/cafee/backend/serv_admin/${product.imagen}" alt="${product.nombre}">
+                <br>
+                <br>
+                <button onclick="editProduct(${product.idProd})">Comprar</button>
+                 <button onclick="editProduct(${product.idProd})">Añadir al carrito</button>
+            `;
+            galeria.appendChild(productElement);
+      })
+    })
+    .catch((error) => {
+        console.error("Error", error);
+      });
+    })
 
 botoncarrito.addEventListener("click", function(){
   

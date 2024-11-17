@@ -1,5 +1,6 @@
 const div = document.getElementById ("contenido");
 const limpiar = document.getElementById ("limpiarcarrito");
+const comprobar = document.getElementById ("comprobarcarrito");
 
 
 
@@ -51,3 +52,27 @@ limpiar.addEventListener("click", () =>{
     })
 
   });
+  comprobarcarrito.addEventListener("click", function(){
+  
+    fetch("./php/comprobarcarrito.php")
+    .then((response) => response.json())
+       
+  
+    .then((data) => { 
+  
+      if (data.success == false){
+        alert("Debes añadir almenos un producto al carrito.")
+      }else{
+        window.location.href="../html/recibo.html"
+      }
+  
+      console.log(data) 
+  
+     })
+    .catch((error) => {
+      console.error("Error", error);
+    });
+  
+  })
+  
+

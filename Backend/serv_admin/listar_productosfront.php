@@ -20,10 +20,10 @@ $stmt->execute();
 $totalItems = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
 //Trae los productos limitados a la cantidad definidos a la variable itemsPerPage
-$stmt = $pdo_conn->prepare("SELECT * FROM producto LIMIT :offset, :itemsPerPage");
-$stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
-$stmt->bindParam(':itemsPerPage', $itemsPerPage, PDO::PARAM_INT);
-//$stmt = $pdo_conn->prepare("SELECT * FROM producto");
+//$stmt = $pdo_conn->prepare("SELECT * FROM producto LIMIT :offset, :itemsPerPage");
+//$stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+//$stmt->bindParam(':itemsPerPage', $itemsPerPage, PDO::PARAM_INT);
+$stmt = $pdo_conn->prepare("SELECT * FROM producto");
 $stmt->execute();
 $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

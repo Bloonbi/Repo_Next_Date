@@ -3,7 +3,7 @@ include 'conexion.php';
 
 try {
     $passwords = [
-        'maga' => '123',
+        'mag' => '123',
       
     ];
 
@@ -12,7 +12,7 @@ try {
         $stmt = $pdo_conn->prepare("INSERT INTO admins (nombre, email, password, cargo) VALUES (:nombre, :email, :password, :cargo)");
         $stmt->execute([
             ':nombre' => ucfirst($username),
-            ':email' => 'maga@gmail.com',
+            ':email' => 'mag@gmail.com',
             ':cargo' => 'nose',
             ':password' => $hashedPassword
         ]);
