@@ -13,10 +13,12 @@
             if (data.success) {
   
                 window.location.reload();
+                
             } else {
 
                 resultDiv.textContent = data.error;
             }
+            
         })
         .catch(error => {
             resultDiv.textContent = 'Error al crear usuario';

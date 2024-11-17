@@ -5,10 +5,6 @@ const botoncarrito = document.getElementById("botoncarrito");
 const galeria = document.getElementById("galeria");
 const galeriapromociones = document.getElementById("galeriapromo");
 
-
-
-
-
 document.addEventListener("DOMContentLoaded", function (page = 1) {
   fetch(`/cafee/backend/serv_admin/listar_productosfront.php?page=${page}`)
     .then(response => response.json())
@@ -100,7 +96,11 @@ botoncarrito.addEventListener("click", function () {
     .then((data) => {
 
       if (data.success == false) {
-        alert("Debes iniciar sesion para ir al carrito.")
+        Swal.fire({
+          title: "Sesión inactiva",
+          text: "Inicie sesión para usar el carrito de compras",
+          icon: "warning"
+        });
       } else {
         window.location.href = "../html/carrito.html"
       }
@@ -146,6 +146,7 @@ producto.addEventListener("keyup", function (event) {
         }
         div.innerHTML = prod;
       })
+      
       .catch((error) => {
         console.error("Error", error);
       });
@@ -189,11 +190,37 @@ boton.addEventListener("click", () => {
     });
 });
 
-function addcart(id){
+function addcart(id) {
   fetch("./php/agregarcarrito.php?producto=" + id)
-  .then((response) => response.text())
-  .then((data) => {
-    console.log(data)
-
-})
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("No tienes una sesión activa");
+      }
+      return response.text();
+    })
+    .then((data) => {
+      console.log(data);
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Producto agregado al carrito"
+      });
+    })
+    .catch((error) => {
+      Swal.fire({
+        icon: "error",
+        title: "Error al agregar al carrito",
+        text: error.message,
+      });
+    });
 }

@@ -103,7 +103,7 @@ function comprobarcarrito(){
       if (data.success == false){
         alert("Debes añadir almenos un producto al carrito.")
       }else{
-        window.location.href="../html/recibo.html"
+          window.location.href = "../html/recibo.html"
       }
   
       console.log(data) 

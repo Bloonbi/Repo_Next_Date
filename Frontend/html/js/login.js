@@ -1,11 +1,9 @@
+
+
 const paginationContainer = document.getElementById('paginationContainer');
 const loadProducts = document.getElementById('loadProducts');
 document.addEventListener('DOMContentLoaded', function(){
-    console.log('1')
-    
-
-
-    
+    console.log('1')    
 function setupPagination(totalPages, currentPage) {
     paginationContainer.innerHTML = '';
 
@@ -21,15 +19,6 @@ function setupPagination(totalPages, currentPage) {
         paginationContainer.appendChild(pageButton);
     }
 }
-
-
-
-
-
-
-
-
-
 
     fetch(`./js/listar_productosfront.php?page=${page}`, {
         method: 'GET',

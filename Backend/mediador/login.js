@@ -10,7 +10,7 @@ const productContainer = document.getElementById('productContainer');
 const paginationContainer = document.getElementById('paginationContainer');
 const añadirProducto = document.getElementById('añadirProducto');
 const modificarDatos = document.getElementById('modificarDatos');
-
+const formModificarEmpresa = document.getElementById('formModificarEmpresa');
 
 //Funcion editar productos
 
@@ -77,14 +77,24 @@ document.getElementById('loginButton').addEventListener('click', function() {
             titulo.style.display = "none";
             logout.style.display = 'block';
             registrarProductoVentana.style.display = 'block';
+            formModificarEmpresa.style.display = "none";
             añadirProducto.className = "active";
             nav.style.display='block';
-            Swal.fire({
-                title: 'Sesion iniciada',
-                text: '',
-                icon: 'success',
-                confirmButtonText: 'Aceptar'
-            });
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.onmouseenter = Swal.stopTimer;
+                  toast.onmouseleave = Swal.resumeTimer;
+                }
+              });
+              Toast.fire({
+                icon: "success",
+                title: "¡Logeado exitosamente!"
+              });
         } else {
             bienvenido.textContent = data.error;
         }
@@ -98,7 +108,7 @@ document.getElementById('loginButton').addEventListener('click', function() {
 
  //añadir producto
 añadirProducto.addEventListener('click', function(){
-    
+
     formLogin.style.display = "none"; 
     titulo.style.display = "none";
     logout.style.display = 'block';
@@ -108,7 +118,8 @@ añadirProducto.addEventListener('click', function(){
     nav.style.display='block';
     añadirProducto.className = "active";
     loadProducts.classList.remove('active');
-    
+    formModificarEmpresa.style.display = "none";
+
 })
 
 
@@ -116,6 +127,22 @@ añadirProducto.addEventListener('click', function(){
 document.getElementById('registerButton').addEventListener('click', function() {
     const formData = new FormData(document.getElementById('registrarProducto'));
     formData.append('registrarProducto', registrarProducto);
+        
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+        title: "¡Producto añadido a la base de datos!"
+      });
 fetch('./serv_admin/agregarproductos.php', {
     method: 'POST',
     body: formData
@@ -252,7 +279,7 @@ logout.addEventListener('click', function(){
     fetch('./serv_admin/logout.php', {
         method: 'POST',
     })
-    function handleLogout() {
+    //function handleLogout() {
         fetch('serv_admin/logout.php')
         .then(response => response.json())
         .then(data => {
@@ -265,39 +292,88 @@ logout.addEventListener('click', function(){
              window.location.href ="index.html";
             }
         })
+        
         .catch(error => {
             console.error('Error:', error);
             bienvenido.textContent = 'Error al cerrar sesión';
         });
-    }
+    //alerta de deslogout
+    //}
 
-    logout.addEventListener('click', handleLogout);
+    logout.addEventListener('click', logout);
+        
+    const Toast = Swal.mixin({
+       toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 5000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+    title: "Sesión cerrada correctamente."
+      });
 })
 
 window.deleteProduct = function(id) {
-    if (confirm('¿Está seguro de que desea eliminar este producto?')) {
-        const formData = new FormData();
-        formData.append('idProd', id);
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-danger",  // Botón de eliminar en rojo
+            cancelButton: "btn btn-success"   // Botón de cancelar en verde
+        },
+    });
 
-        fetch('./serv_admin/eliminar_productos.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                bienvenido.textContent = data.success;
-                loadProduct();
-            } else {
-                bienvenido.textContent = data.error;
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            bienvenido.textContent = 'Error al eliminar producto';
-        });
-    }
-}
+    swalWithBootstrapButtons.fire({
+        title: "¿Estás seguro?",
+        text: "¡No podrás revertir esta acción!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "No, cancelar",
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const formData = new FormData();
+            formData.append('idProd', id);
+
+            fetch('./serv_admin/eliminar_productos.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Respuesta del servidor:", data);
+                if (data.success) {
+                    swalWithBootstrapButtons.fire(
+                        "¡Eliminado!",
+                        "El producto ha sido eliminado.",
+                        "success"
+                    );
+                    bienvenido.textContent = data.success;
+                    loadProduct();
+                } else {
+                    bienvenido.textContent = data.error;
+                    console.error("Error:", data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                bienvenido.textContent = 'Error al eliminar producto';
+            });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            swalWithBootstrapButtons.fire(
+                "Cancelado",
+                "El producto está seguro :)",
+                "error"
+            );
+        }
+    });
+};
+
 
 function editProduct(id) {
     const div = document.getElementById ("formModificar");
