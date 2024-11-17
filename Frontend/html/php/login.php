@@ -1,23 +1,24 @@
 <?php
-include "conexion.php";
+session_start();
+require 'conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $stmt = $con->prepare('SELECT * FROM cliente WHERE Email = :email');
-    $stmt->bindParam(':email', $email);
-    $stmt->execute();
+    $sql = 'SELECT * FROM cliente WHERE Email = :email';
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(['email' => $email]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($password, $user['Password'])) {
-        session_start();
-        $_SESSION['cliente'] = $user['Nombre'];
-        $_SESSION['idc'] = $user['Id_Cliente'];
-        echo json_encode(['success' => 'Usuario creado correctamente', 'cliente' => $user]);
-
+        $_SESSION['user_id'] = $user['Id_Cliente'];
+        $_SESSION['user_name'] = $user['Nombre'];
+        echo 'success';
     } else {
-        echo 'Invalid ';
+        echo 'Correo o contraseña incorrectos.';
     }
+} else {
+    echo 'Método de solicitud no permitido.';
 }
 ?>
