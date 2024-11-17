@@ -6,7 +6,7 @@ $idcliente = $_SESSION['idc'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtener la contraseña actual desde la base de datos
-    $sql = "SELECT Password FROM cliente WHERE id = :idc";
+    $sql = "SELECT password FROM cliente WHERE id = :idc";
     $stmt = $con->prepare($sql);
     $stmt->bindParam(':idc', $idcliente);
     $stmt->execute();
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $NuevaContraseña = password_hash($nuevaContrasena, PASSWORD_BCRYPT);
 
     // Actualizar la contraseña en la base de datos
-    $updateStmt = $con->prepare("UPDATE cliente SET Password = :Password WHERE Id_Cliente = :idc");
+    $updateStmt = $con->prepare("UPDATE cliente SET password = :Password WHERE id = :idc");
     $updateStmt->bindParam(':Password', $NuevaContraseña);
     $updateStmt->bindParam(':idc', $idcliente);
 

@@ -15,7 +15,7 @@ $offset = ($page - 1) * $itemsPerPage;
 try {
 
 //Trae todos los productos
-$stmt = $pdo_conn->prepare("SELECT COUNT(*) as total FROM producto WHERE promocion != '1'");
+$stmt = $pdo_conn->prepare("SELECT COUNT(*) as total FROM producto WHERE promocion = '1'");
 $stmt->execute();
 $totalItems = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
@@ -23,7 +23,7 @@ $totalItems = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
 //$stmt = $pdo_conn->prepare("SELECT * FROM producto LIMIT :offset, :itemsPerPage");
 //$stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
 //$stmt->bindParam(':itemsPerPage', $itemsPerPage, PDO::PARAM_INT);
-$stmt = $pdo_conn->prepare("SELECT * FROM producto WHERE promocion != '1'");
+$stmt = $pdo_conn->prepare("SELECT * FROM producto WHERE promocion = '1'");
 $stmt->execute();
 $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

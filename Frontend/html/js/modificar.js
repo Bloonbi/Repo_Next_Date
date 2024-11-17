@@ -17,13 +17,13 @@ document.addEventListener("DOMContentLoaded", async() =>{
                 <div class="container_main">
 
               
-                <h4>Nombre:</h4><input id='nombre' type="text" value= ${data[id].Nombre}>
+                <h4>Nombre:</h4><input id='nombre' type="text" value= ${data[id].nombre}>
 
                 <br>
-                <h4>Email:</h4> <input id='email' type="text" value= ${data[id].Email}>
+                <h4>Email:</h4> <input id='email' type="text" value= ${data[id].email}>
                  <br>
                    
-                <h4>Direccion:</h4> <input id='direccion' type="text" value= ${data[id].Direccion}>
+                <h4>Direccion:</h4> <input id='direccion' type="text" value= ${data[id].direccion}>
 
  
                 </div>

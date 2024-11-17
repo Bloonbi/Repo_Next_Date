@@ -31,9 +31,13 @@ if (isset($_GET['producto'])) {
     if ($stmt->rowCount() > 0) {
         // Si el producto ya está en el carrito, actualiza la cantidad
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $nuevaCantidad = $_GET['cantidad'];
+        if(isset($_GET['cantidad'])){
+            $nuevaCantidad = $_GET['cantidad'];
+        }else{
+            $nuevaCantidad = $row['cantidad'];
+            $nuevaCantidad++;
+        }
         //$precio = $prod['precio'];
-        
         $updateStmt = $con->prepare("UPDATE carrito_compra SET cantidad = :cantidad WHERE idProducto = :Id_Producto AND idCliente = :Id_Cliente");
         $updateStmt->bindParam(':cantidad', $nuevaCantidad);
         $updateStmt->bindParam(':Id_Producto', $idprod);

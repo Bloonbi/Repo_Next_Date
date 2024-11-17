@@ -11,7 +11,7 @@ $direccion = $_POST['direccion'];
 
 $idcliente = $_SESSION['idc'];
 
-        $updateStmt = $con->prepare("UPDATE cliente SET Nombre = :Nombre , Email = :Email, Direccion = :Direccion WHERE Id_Cliente = :Id_Cliente");
+        $updateStmt = $con->prepare("UPDATE cliente SET nombre = :Nombre , email = :Email, direccion = :Direccion WHERE id = :Id_Cliente");
         $updateStmt->bindParam(':Nombre', $nuevoNombre);
         $updateStmt->bindParam(':Email', $email);
         $updateStmt->bindParam(':Direccion', $direccion);

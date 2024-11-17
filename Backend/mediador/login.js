@@ -161,6 +161,8 @@ function loadProduct(page = 1) {
                 <p>${product.descripcion}</p>
                 <p>Precio: $${product.precio}</p>
                 <p>Cantidad: ${product.cantidad}</p>
+                <p>Promocion: ${product.promocion}</p>
+                <p>Porcentaje: ${product.porcentaje}</p>
                 <img src="serv_admin/${product.imagen}" alt="${product.nombre}">
                 <br>
                 <button onclick="editProduct(${product.idProd})">Editar</button>
@@ -173,30 +175,7 @@ function loadProduct(page = 1) {
            
         });
 //Funcion para eliminar producto
-        window.deleteProduct = function(id) {
-            if (confirm('¿Está seguro de que desea eliminar este producto?')) {
-                const formData = new FormData();
-                formData.append('idProd', id);
-    
-                fetch('./serv_admin/eliminar_productos.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        bienvenido.textContent = data.success;
-                        loadProduct();
-                    } else {
-                        bienvenido.textContent = data.error;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    bienvenido.textContent = 'Error al eliminar producto';
-                });
-            }
-        }
+
 
 //reseteo de la pagina
 /*
@@ -294,3 +273,98 @@ logout.addEventListener('click', function(){
 
     logout.addEventListener('click', handleLogout);
 })
+
+window.deleteProduct = function(id) {
+    if (confirm('¿Está seguro de que desea eliminar este producto?')) {
+        const formData = new FormData();
+        formData.append('idProd', id);
+
+        fetch('./serv_admin/eliminar_productos.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                bienvenido.textContent = data.success;
+                loadProduct();
+            } else {
+                bienvenido.textContent = data.error;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            bienvenido.textContent = 'Error al eliminar producto';
+        });
+    }
+}
+
+function editProduct(id) {
+    const div = document.getElementById ("formModificar");
+
+
+    fetch("./serv_admin/buscaruno.php?id="+id)
+      .then((response) => response.json())
+         
+      .then((data) => {
+        console.log(data)
+        var product = "";
+      
+        product += `
+         <div class="col-md-4">
+                <div class="container_main">
+        <form id="FormModificar">
+              
+
+                <h4>ID:</h4><input id='id' name="idProd" type="text" value= ${id}>
+                <br>
+                <h4>Nombre:</h4><input id='nombre' name="nombre" type="text" value= ${data.nombre}>
+                <br>
+                <h4>Descripcion:</h4> <input id='descripcion' name="descripcion" type="text" value= ${data.descripcion}>
+                <br>
+                <h4>Precio:</h4> <input id='precio' name="precio" type="text" value= ${data.precio}>
+                 <br>
+                <h4>Cantidad:</h4> <input id='cantidad' name="cantidad" type="text" value= ${data.cantidad}>
+                <br>
+                <h4>Promocion:</h4> <input type="text" id='promocion' name="promocion" value= ${data.promocion}>
+                <br>
+                <h4>Porcentaje:</h4> <input id='porcentaje' name="porcentaje"  type="text" value= ${data.porcentaje}>
+                </div>
+                <button onClick="modificar()" id="modificarProd"> Modificar </button>
+              </div>
+              <hr>
+               
+              </form>
+              `;
+    
+        bienvenido.innerHTML = product;
+      })
+      .catch((error) => {
+        console.error("Error", error);
+      })
+
+}
+
+
+function modificar(){
+    const FormModificar = document.getElementById("FormModificar")
+    const formulario = new FormData(FormModificar)   
+    console.log(formulario)
+    fetch("./serv_admin/editar.php", {
+        method: 'POST',
+        body: formulario
+  
+      })
+      
+      .then((response) => response.json())
+            
+      .then((data) => { 
+        alert(data.message);
+        console.log(data)
+  
+      })
+      .catch((error) => {
+        console.error("Error", error);
+      })
+}
+

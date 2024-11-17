@@ -3,6 +3,7 @@ const producto = document.getElementById("buscar-producto");
 const div = document.getElementById("galeria");
 const botoncarrito = document.getElementById("botoncarrito");
 const galeria = document.getElementById("galeria");
+const galeriapromociones = document.getElementById("galeriapromo");
 
 
 
@@ -27,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function (page = 1) {
                 <img src="/cafee/backend/serv_admin/${product.imagen}" alt="${product.nombre}">
                 <br>
                 <br>
-                <button onclick="addToCart(${product.idProd})">Comprar</button>
+                <button onclick="addcart(${product.idProd})" id=${product.idProd} class="carrito fa fa-shopping-cart"></button>
             `;
         galeria.appendChild(productElement);
       })
@@ -35,7 +36,36 @@ document.addEventListener("DOMContentLoaded", function (page = 1) {
     .catch((error) => {
       console.error("Error", error);
     });
+    
+    fetch(`/cafee/backend/serv_admin/listarpromociones.php?page=${page}`)
+    .then(response => response.json())
+    .then((data) => {
+      console.log(data)
+
+      //Exito, Construccion de objetos
+      galeriapromociones.innerHTML = '';
+      data.producto.forEach(product => {
+        const productElement = document.createElement('div');
+        productElement.classList.add('product');
+        productElement.innerHTML = `
+                <h3>${product.nombre}</h3>
+                <p>${product.descripcion}</p>
+                <p>Precio Anterior: $${product.precio}</p>
+                <p class="precionuevo">Precio Nuevo:</p>
+                <p>Cantidad: ${product.cantidad}</p>
+                <img src="/cafee/backend/serv_admin/${product.imagen}" alt="${product.nombre}">
+                <br>
+                <br>
+                <button onclick="addcart(${product.idProd})" id=${product.idProd} class="carrito fa fa-shopping-cart"></button>
+            `;
+        galeriapromociones.appendChild(productElement);
+      })
+    })
+    .catch((error) => {
+      console.error("Error", error);
+    });
 })
+
 
 
 
@@ -104,7 +134,7 @@ producto.addEventListener("keyup", function (event) {
               <h3>${data[id].nombre}</h3>
                  <h3>Descripcion: ${data[id].descripcion}</h3>
                  <h3 id=${data[id].idProd}>${data[id].precio}</h3>
-          <button id=${data[id].idProd}  class="carrito fa fa-shopping-cart"></button>
+          <button onclick="addcart(${data[id].idProd})" id=${data[id].idProd} class="carrito fa fa-shopping-cart"></button>
           
              <img src="/cafee/backend/serv_admin/${product.imagen}" alt="${product.nombre}">
 
@@ -131,33 +161,39 @@ boton.addEventListener("click", () => {
 
   fetch("./php/busqueda.php?producto=" + producto.value)
     .then((response) => response.json())
-
-
     .then((data) => {
-      var prod = "";
-      for (var id = 0; id < data.length; id++) {
-        prod += `
-      <div class="col-md-4">
-    <div class="container_main">
-        <h3>${data[id].nombre}</h3>
-        <h3>Descripcion: ${data[id].descripcion}</h3>
-        <h3>Precio: ${data[id].precio}</h3>
-        <button id=${data[id].idProd} class="carrito fa fa-shopping-cart"></button>
-  
-    </div>
-</div>
+      console.log(data)
+            //Exito, Construccion de objetos
+            galeria.innerHTML = '';
+            for (var id = 0; id < data.length; id++){
+              const productElement = document.createElement('div');
+              productElement.classList.add('product');
+              productElement.innerHTML = `
+                      <h3>${data[id].nombre}</h3>
+                      <p>${data[id].descripcion}</p>
+                      <p>Precio Anterior: $${data[id].precio}</p>
+                      <p class="precionuevo">Precio Nuevo:</p>
+                      <p>Cantidad: ${data[id].cantidad}</p>
+                      <img src="/cafee/backend/serv_admin/${data[id].imagen}" alt="${data[id].nombre}">
+                      <br>
+                      <br>
+                      <button onclick="addcart(${data[id].idProd})" id=${data[id].idProd} class="carrito fa fa-shopping-cart"></button>
+                  `;
+              galeria.appendChild(productElement);
 
-             `;
-      }
-      div.innerHTML = prod;
+            }
     })
+  
     .catch((error) => {
       console.error("Error", error);
     });
 });
 
+function addcart(id){
+  fetch("./php/agregarcarrito.php?producto=" + id)
+  .then((response) => response.text())
+  .then((data) => {
+    console.log(data)
 
-
-
-
-// window.location.href = "../html/gallery.html"
+})
+}

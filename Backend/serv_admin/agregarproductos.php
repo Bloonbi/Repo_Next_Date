@@ -11,6 +11,7 @@ $cantidad = $_POST['cantidad'] ?? null;
 $imagen = $_POST['imagen'] ?? null;
 
 
+
 if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
   $uploadDir = 'uploads/';
  

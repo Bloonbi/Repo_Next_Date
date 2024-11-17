@@ -1,5 +1,6 @@
+
 document.addEventListener("DOMContentLoaded", async() =>{
-const div = document.getElementById ("contenidouser");
+const divModificar = document.getElementById ("formModificar");
 
 
     fetch("./serv_admin/editar.php")
@@ -28,7 +29,7 @@ const div = document.getElementById ("contenidouser");
               <hr>
                `;
         }
-        bienvenido.innerHTML = product;
+        divModificar.innerHTML = product;
       })
       .catch((error) => {
         console.error("Error", error);
