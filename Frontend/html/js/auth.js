@@ -1,6 +1,6 @@
 function validar() {
   fetch("/cafeteria/html/php/validar.php", {
-    method: "GET",
+    method: "POST",
   })
     .then((response) => response.json())
     .then((data) => {
@@ -86,7 +86,7 @@ botonregistrar.addEventListener("click", async function () {
 
 document.addEventListener("DOMContentLoaded", async function () {
   fetch("/cafeteria/html/php/validar.php", {
-    method: "GET",
+    method: "POST",
   })
     .then((response) => response.json())
     .then((data) => {

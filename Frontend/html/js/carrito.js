@@ -1,4 +1,5 @@
 const div = document.getElementById ("contenido");
+const limpiar = document.getElementById ("limpiarcarrito");
 
 
 
@@ -35,3 +36,17 @@ document.addEventListener("DOMContentLoaded", async() =>{
         console.error("Error", error);
       })
     });
+
+limpiar.addEventListener("click", () =>{
+
+  
+  fetch("./php/limpiarcarrito.php")
+    .then((response) => response.json())
+          
+    .then((data) => { 
+      div.innerHTML = "";   
+
+
+    })
+
+  });

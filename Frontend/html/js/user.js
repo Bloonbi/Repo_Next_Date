@@ -1,6 +1,9 @@
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', 
+    
+    
+    function() {
     fetch('/cafeteria/html/php/validar.php', {
-        method: 'GET',
+        method: 'POST',
     
     })
     .then(response => response.json())

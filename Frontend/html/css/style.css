@@ -67,6 +67,11 @@ a {
   z-index: 1;
 }
 
+.fa{
+  width: 50px;
+  height: 50px;
+}
+
 h1,
 h2,
 h3,
@@ -205,7 +210,7 @@ img {
 
 .form-control:focus {
   border-color: #ffffff !important;
-  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(102, 52, 23, 0.863);
 }
 
 .navbar-form input {
@@ -243,7 +248,7 @@ button {
 .header_section {
   width: 100%;
   float: left;
-  background-color: #252525;
+  background-color: #a36237;
   height: auto;
   background-size: 100%;
 }
@@ -287,6 +292,7 @@ button {
   display: inline;
 }
 .imglogo {
+  background-color: white;
   position: absolute;
   top: 5%;
   left: 3%;
@@ -294,6 +300,7 @@ button {
   height: auto;
   margin-top: 1%;
   min-width: 120px;
+  filter: drop-shadow(0px 0px 12px black);
 }
 
 /* header section end */
