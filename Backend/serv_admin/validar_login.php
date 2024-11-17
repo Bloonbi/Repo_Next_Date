@@ -1,7 +1,7 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-include '../controladores/conecta_bd.php';
+include '../controlador/conexion.php';
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);

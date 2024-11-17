@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Login</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../../vistas/assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="../../images/avatar.png" alt="" /></span>
+					<h1 id="logo"><a href="#">Cafetería Imperial</a></h1>
+					<p>In our coffee shop we want you to feel the taste of coffee grain ny grain<br /> </p>
+				</header>
+				<nav id="nav" style="display: none";>
+					<ul>		
+						<li><a href="#one" class="active" id="logout">Logout</a></li>
+						<li><a href="#two">Modificar datos de empresa</a></li>
+						<li><a href="#tree" id="loadProducts">Ver productos</a></li>
+					</ul>
+				</nav>
+				<footer>
+					
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+
+				
+						<!-- Four -->
+							<section id="four">
+								<div class="container">
+									<div id="bienvenido"></div>
+									<h1>Bienvenidos al administrador de Cafeteria Imperial</h1>
+									<p>Welcome to the administrator of Cafeteria Imperial</p>
+									<br>
+									<h3 id="titulo">Login</h3>
+									<!--
+									<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non. Adipiscing cubilia elementum integer. Integer eu ante ornare amet commetus.</p>
+									-->
+									<input class="primary" value="Logout" id="logoutButton" style="display:none";/>
+									<div id="formlogin">
+										<div class="row gtr-uniform">
+											<div class="col-6 col-12-xsmall"><input type="text" name="Email" id="email" placeholder="Email" /></div>
+											
+											
+											<div class="col-6 col-12-xsmall"><input type="password" name="Password" id="password" placeholder="Password" /></div>
+											
+									
+											<div class="col-12">
+												<ul class="actions">
+													<li><input type="submit" class="primary" value="Accept" id="loginButton"/></li>
+													<li><input type="reset" value="Cancelar" /></li>
+													
+												</ul>
+											</div>
+										</div>
+									</div>
+
+									<!-- formulario de registro --> 								
+									<div id="registrarProductoVentana" style="display:none";>
+									<h3>registrarProducto</h3>
+									<form id="registrarProducto" enctype="multipart/form-data">
+
+										<div class="row gtr-uniform">
+											<div class="col-6 col-12-xsmall"><input type="text" name="nombre" id="nombre" placeholder="Nombre" /></div>
+											<div class="col-6 col-12-xsmall"><input type="text" name="descripcion" id="descripcion" placeholder="Descripcion" /></div>
+											<br>
+											<div class="col-6 col-12-xsmall"><input type="text" name="precio" id="precio" placeholder="Precio" /></div>
+											<br>
+											<div class="col-6 col-12-xsmall"><input type="text" name="cantidad" id="cantidad" placeholder="Cantidad" /></div>
+											<br>
+											<div class="col-6 col-12-xsmall"><input type="file" name="imagen" id="imagen" placeholder="imagen" /></div>
+											<div class="col-12">
+												<ul class="actions">
+													<li><input type="button" class="primary" value="Guardar" id="registerButton"/></li>
+												</ul>
+											</div>
+											
+										</div>
+									</form>
+								</div>
+								</div>
+								<!-- Muestra productos -->
+								<div id="productContainer"> </div>
+								<div id="paginationContainer"> </div>
+							</section>
+							<div id="formModificar">
+								<h1>Modificar datos de empresa</h1>
+								<label for="nombre">Nombre:</label><br>
+								<input type="text" id="nombremod" name="nombremod" required><br>
+			
+								<label for="descripcion">Descripción:</label><br>
+								<input type="text" id="descripcionmod" name="descripcionmod"><br>
+			
+								<label for="precio">Precio:</label><br>
+								<input type="number" id="precio" name="precio" required><br>
+			
+								<label for="cantidad">Cantidad:</label><br>
+								<input type="number" id="cantidad" name="cantidad" required><br>
+			
+								<input class="boton" type="submit" value="Agregar Producto">
+								</form>
+						</div>
+						
+
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script src="mediador/login.js"></script>
+	</body>
+</html>

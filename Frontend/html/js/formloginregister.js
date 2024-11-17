@@ -1,16 +1,30 @@
+document.addEventListener('DOMContentLoaded', function() {
 
-$(document).ready(function() {
-    const botonregistrar = document.getElementById('botonregistrar');
+const botonregistrar = document.getElementById('botonregistrar');
+const resultDiv = document.getElementById('register-message');
+const formulario= document.getElementById('registerForm');
    
     
-    registerButton.addEventListener('click', function() {
-        const formData = new FormData(document.getElementById('registerForm'));
-        formData.append('action', 'create');
+    botonregistrar.addEventListener('click', function() {
+        const formData = new FormData(formulario);
+        alert(formData);
+        /*formData.append('action', 'create');
 
         fetch('../php/register.php', {
-            
             method: 'POST',
             body: formData
-        });
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                resultDiv.textContent = 'Sesión activa: ' + data.user.username;
+            } else {
+                resultDiv.textContent = data.error;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            resultDiv.textContent = 'Error al crear usuario';
+       });*/
 });
 });

@@ -1,5 +1,5 @@
 <?php
-require 'conexion.php';
+include "conexion.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
@@ -12,10 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($user && password_verify($password, $user['Password'])) {
         session_start();
-        $_SESSION['user'] = $user['Nombre'];
-        echo 'success';
+        $_SESSION['cliente'] = $user['Nombre'];
+        $_SESSION['idc'] = $user['Id_Cliente'];
+        echo json_encode(['success' => 'Usuario creado correctamente', 'cliente' => $user]);
+
     } else {
-        echo 'Invalid email or password';
+        echo 'Invalid ';
     }
 }
 ?>

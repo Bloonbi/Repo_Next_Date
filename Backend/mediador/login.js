@@ -6,6 +6,8 @@ const registrarProductoVentana = document.getElementById('registrarProductoVenta
 const nav = document.getElementById('nav');
 const logout = document.getElementById('logout');
 const registerButton = document.getElementById('registerButton');
+const loadProducts = document.getElementById('loadProducts');
+
 
 
 // login
@@ -73,16 +75,8 @@ logout.addEventListener('click', function(){
 
 //registro de producto
 document.getElementById('registerButton').addEventListener('click', function() {
-    const nombre = document.getElementById('nombre').value;
-    const descripcion = document.getElementById('descripcion').value;
-    const precio = document.getElementById('precio').value;
-    const cantidad = document.getElementById('cantidad').value;
-    const formData = new FormData();
-    formData.append('nombre', nombre); 
-    formData.append('descripcion', descripcion);
-    formData.append('precio', precio);
-    formData.append('cantidad', cantidad);
-
+    const formData = new FormData(document.getElementById('registrarProducto'));
+    formData.append('registrarProducto', registrarProducto);
 fetch('./serv_admin/agregarproductos.php', {
     method: 'POST',
     body: formData
@@ -96,13 +90,9 @@ fetch('./serv_admin/agregarproductos.php', {
 .then(data => {
     if (data.success) {
     // respuesta al grabar producto
-
-
     bienvenido.textContent = 'Guardado correctamente';
-    
-    
-    
-    } else {
+    document.getElementById('registrarProducto').reset();
+      } else {
         bienvenido.textContent = data.error;
     }
 })
@@ -111,3 +101,57 @@ fetch('./serv_admin/agregarproductos.php', {
     bienvenido.textContent = 'Error al guardar el producto';
 });
 })
+//Funcion para cargar productos
+function loadProduct(page = 1) {
+    fetch(`serv_admin/listar_productos.php?page=${page}`)
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            bienvenido.textContent = 'Error al cargar productos';
+            return;
+        }
+    //Construccion de objetos
+        productContainer.innerHTML = '';
+        data.productos.forEach(product => {
+            const productElement = document.createElement('div');
+            productElement.classList.add('product');
+            productElement.innerHTML = `
+                <h3>${product.nombre}</h3>
+                <p>${product.descripcion}</p>
+                <p>Precio: $${product.precio}</p>
+                <p>Cantidad: $${product.cantidad}</p>
+                <img src="serv_admin/${product.imagen}" alt="${product.nombre}" class="productimg">
+                <button onclick="editProduct(${product.idProd})">Editar</button>
+                <button onclick="deleteProduct(${product.idProd})">Eliminar</button>
+            `;
+            productContainer.appendChild(productElement);
+        });
+//Comienza codigo para paginacion
+        setupPagination(data.totalPages, data.currentPage);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        bienvenido.textContent = 'Error al cargar productos';
+    });
+}
+
+function setupPagination(totalPages, currentPage) {
+    paginationContainer.innerHTML = '';
+
+    for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement('button');
+        pageButton.textContent = i;
+        if (i === currentPage) {
+            pageButton.disabled = true;
+        }
+        pageButton.addEventListener('click', function() {
+            loadProduct(i);
+        });
+        paginationContainer.appendChild(pageButton);
+    }
+}
+
+loadProducts.addEventListener('click', function() {
+    registrarProductoVentana.style.display = 'none';
+    loadProduct();
+});
