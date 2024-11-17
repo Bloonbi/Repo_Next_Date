@@ -7,10 +7,51 @@ const logout = document.getElementById('logout');
 const registerButton = document.getElementById('registerButton');
 const loadProducts = document.getElementById('loadProducts');
 const productContainer = document.getElementById('productContainer');
+const paginationContainer = document.getElementById('paginationContainer');
 const añadirProducto = document.getElementById('añadirProducto');
 const modificarDatos = document.getElementById('modificarDatos');
 
 
+//Funcion editar productos
+
+//reseteo de la pagina
+document.addEventListener('DOMContentLoaded', function(){
+    console.log('1')
+
+    fetch('./serv_admin/check_sesion.php', {
+        method: 'GET',
+    })
+     .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    }) 
+    .then(data => {
+        if (data.session) {
+            bienvenido.textContent = 'Sesión activa: ' + data.email;
+
+            formLogin.style.display = "none"; 
+            titulo.style.display = "none";
+            logout.style.display = 'block';
+            registrarProductoVentana.style.display = 'block';
+            añadirProducto.className = "active";
+            nav.style.display='block';
+
+        } else {
+            console.log(data)
+            bienvenido.textContent = data.error;
+        }
+        setupPagination(data.totalPages, data.currentPage);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        bienvenido.textContent = 'Error en el login';
+    })
+
+       
+
+    });
 // login
 document.getElementById('loginButton').addEventListener('click', function() {
     const email = document.getElementById('email').value;
@@ -36,7 +77,14 @@ document.getElementById('loginButton').addEventListener('click', function() {
             titulo.style.display = "none";
             logout.style.display = 'block';
             registrarProductoVentana.style.display = 'block';
+            añadirProducto.className = "active";
             nav.style.display='block';
+            Swal.fire({
+                title: 'Sesion iniciada',
+                text: '',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            });
         } else {
             bienvenido.textContent = data.error;
         }
@@ -50,13 +98,17 @@ document.getElementById('loginButton').addEventListener('click', function() {
 
  //añadir producto
 añadirProducto.addEventListener('click', function(){
+    
     formLogin.style.display = "none"; 
     titulo.style.display = "none";
     logout.style.display = 'block';
     productContainer.style.display = 'none';
+    paginationContainer.style.display = 'none';
     registrarProductoVentana.style.display = 'block';
     nav.style.display='block';
-
+    añadirProducto.className = "active";
+    loadProducts.classList.remove('active');
+    
 })
 
 
@@ -79,6 +131,7 @@ fetch('./serv_admin/agregarproductos.php', {
     // respuesta al grabar producto
     bienvenido.textContent = 'Guardado correctamente';
     document.getElementById('registrarProducto').reset();
+  
       } else {
         bienvenido.textContent = data.error;
     }
@@ -98,6 +151,7 @@ function loadProduct(page = 1) {
             return;
         }
     //Exito, Construccion de objetos
+    
         productContainer.innerHTML = '';
         data.producto.forEach(product => {
             const productElement = document.createElement('div');
@@ -113,6 +167,10 @@ function loadProduct(page = 1) {
                 <button onclick="deleteProduct(${product.idProd})">Eliminar</button>
             `;
             productContainer.appendChild(productElement);
+            paginationContainer.style.display = "block";
+            loadProducts.className = "active";
+            añadirProducto.classList.remove('active');
+           
         });
 //Funcion para eliminar producto
         window.deleteProduct = function(id) {
@@ -139,35 +197,11 @@ function loadProduct(page = 1) {
                 });
             }
         }
-//Funcion editar productos
-window.deleteProduct = function(id) {
-    if (confirm('¿Está seguro de que desea modificar este producto?')) {
-        const formData = new FormData();
-        formData.append('idProd', id);
-
-        fetch('./serv_admin/eliminar_productos.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                bienvenido.textContent = data.success;
-                loadProduct();
-            } else {
-                bienvenido.textContent = data.error;
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            bienvenido.textContent = 'Error al eliminar producto';
-        });
-    }
-}
 
 //reseteo de la pagina
-document.addEventListener('DOMContentLoaded', function(){
-    console.log('Ok')
+/*
+document.addEventListenerDOMContentLoaded('', function(){
+    console.log('2')
 
     fetch('./serv_admin/check_sesion.php', {
         method: 'GET',
@@ -181,11 +215,13 @@ document.addEventListener('DOMContentLoaded', function(){
     .then(data => {
         if (data.session) {
             bienvenido.textContent = 'Sesión activa: ' + data.admins.email;
-            formLogin.style.display = "none"; 
+            formLogin.style.display = "none";
             titulo.style.display = "none";
             logout.style.display = 'block';
             registrarProductoVentana.style.display = 'block';
             nav.style.display='block';
+            añadirProducto.className = "active";
+            loadProducts.classList.remove('active');
 
         } else {
             console.log(data)
@@ -198,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 
 
-})
+}) */
 
 
 //Comienza codigo para paginacion
@@ -227,14 +263,11 @@ function setupPagination(totalPages, currentPage) {
 }
 
 loadProducts.addEventListener('click', function() {
-    loadProducts.classList.add('#tree');
     registrarProductoVentana.style.display = 'none';
     productContainer.style.display = 'flex';
     loadProduct();
     
 });
-
-
 // logout
 logout.addEventListener('click', function(){
     fetch('./serv_admin/logout.php', {

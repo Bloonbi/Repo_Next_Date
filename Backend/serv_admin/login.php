@@ -20,7 +20,7 @@ if ($username && $password) {
         if ($usuario) {
             if (password_verify($password, $usuario['password'])) {
                 // Almacenar datos del usuario en la sesión
-                $_SESSION['user'] = $usuario;
+                $_SESSION['email'] = $username;
                 echo json_encode(['success' => 'Login exitoso', 'user' => $usuario, 'session' => true]);
             } else {
                 echo json_encode(['error' => 'Usuario o contraseña incorrectos']);

@@ -12,28 +12,28 @@ try {
     $params = [];
 
     if ($nombre !== null) {
-        $sql .= "Nombre = :nombre, ";
+        $sql .= "nombre = :nombre, ";
         $params[':nombre'] = $nombre;
     }
     if ($password !== null) {
-        $sql .= "Password = :password, ";
+        $sql .= "password = :password, ";
         $params[':password'] = $password;
     }
     if ($direccion !== null) {
-        $sql .= "Direccion = :direccion, ";
+        $sql .= "direccion = :direccion, ";
         $params[':direccion'] = $direccion;
     }
     if ($telefono !== null) {
-        $sql .= "Telefono = :telefono, ";
+        $sql .= "telefono = :telefono, ";
         $params[':telefono'] = $telefono;
     }
     if ($fecha_registro !== null) {
-        $sql .= "Fecha_registro = :fecha_registro, ";
+        $sql .= "fchReg = :fecha_registro, ";
         $params[':fecha_registro'] = $fecha_registro;
     }
 
     $sql = rtrim($sql, ', ');
-    $sql .= " WHERE Email = :email";
+    $sql .= " WHERE email = :email";
     $params[':email'] = $email;
 
     $stmt = $pdo->prepare($sql);

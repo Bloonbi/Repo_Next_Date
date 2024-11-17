@@ -6,7 +6,7 @@ include "conexion.php"; // Asegúrate de que "conexion.php" contiene la conexió
 $idcliente = $_SESSION['idc']; // Obtén el ID del cliente de la sesión
 
 // Consulta para contar los productos en el carrito
-$stmt = $con->prepare("SELECT COUNT(*) FROM carrito_compra WHERE Id_Cliente = :Id_Cliente");
+$stmt = $con->prepare("SELECT COUNT(*) FROM carrito_compra WHERE idCliente = :Id_Cliente");
 $stmt->bindParam(':Id_Cliente', $idcliente);
 $stmt->execute();
 

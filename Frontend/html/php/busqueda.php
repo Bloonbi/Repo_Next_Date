@@ -7,7 +7,7 @@ if (isset($_GET['producto'])) {
     try {
 
         
-        $sql = "SELECT * FROM producto WHERE Nombre LIKE :nombre";
+        $sql = "SELECT * FROM producto WHERE nombre LIKE :nombre";
         $stmt = $con->prepare($sql);
         $stmt->execute(['nombre' => "%$nombreProducto%"]);
 

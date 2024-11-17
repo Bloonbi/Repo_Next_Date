@@ -5,7 +5,7 @@ include "conexion.php";
 
 $idcliente = $_SESSION['idc'];
 
-$stmt = $con->prepare("DELETE FROM carrito_compra WHERE Id_Cliente = :Id_Cliente");
+$stmt = $con->prepare("DELETE FROM carrito_compra WHERE idCliente = :Id_Cliente");
 $stmt->bindParam(':Id_Cliente', $idcliente);
 $stmt->execute();
 

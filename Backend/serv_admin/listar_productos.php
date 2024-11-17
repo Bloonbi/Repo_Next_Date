@@ -7,7 +7,7 @@ include '../controlador/conexion.php';
 ini_set('display_errors', 1); */
 
 //Crea la paginacion
-$itemsPerPage = 10;
+$itemsPerPage = 9;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $itemsPerPage;
 

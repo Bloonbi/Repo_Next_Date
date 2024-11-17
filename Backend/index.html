@@ -10,6 +10,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="./vistas/assets/css/main.css" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 	</head>
 	<body class="is-preload">
 
@@ -23,9 +24,10 @@
 				<nav id="nav" style="display: none";>
 					<ul>		
 						<li><a id="añadirProducto">Añadir Producto</a></li>
+
 						<li><a id="modificarDatos">Modificar datos de empresa</a></li>
 						<li><a id="loadProducts">Ver productos</a></li>
-						<li><a class="active" id="logout">Logout</a></li>
+						<li><a id="logout">Logout</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -93,7 +95,9 @@
 								</div>
 								<!-- Muestra productos -->
 								<div id="productContainer"> </div>
-								<div id="paginationContainer"> </div>
+
+									<!-- Paginacion-->
+								<div id="paginationContainer" style="display: none"> </div>
 							</section>
 							<div id="formModificar">
 								<h1>Modificar datos de empresa</h1>
@@ -136,5 +140,7 @@
 			<script src="vistas/assets/js/util.js"></script>
 			<script src="vistas/assets/js/main.js"></script> 
 			<script src="mediador/login.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+		</body>
 	</body>
 </html>

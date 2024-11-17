@@ -26,7 +26,7 @@ $date = date('Y-m-d');
 
     try {
         // Insert Cliente into the database
-        $stmt = $con->prepare("INSERT INTO cliente (Nombre, Email, Password, Direccion, Telefono, fchReg) VALUES (:nombre, :email, :password, :address, :phone, :date)");
+        $stmt = $con->prepare("INSERT INTO cliente (nombre, email, password, direccion, telefono, fchReg) VALUES (:nombre, :email, :password, :address, :phone, :date)");
         $stmt->bindParam(':nombre', $name);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $password_hashed);
@@ -36,13 +36,13 @@ $date = date('Y-m-d');
         $stmt->execute();
 
         // Fetch the new Cliente to set session variable
-        $stmt = $con->prepare("SELECT * FROM cliente WHERE Email = :email");
+        $stmt = $con->prepare("SELECT * FROM cliente WHERE email = :email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $_SESSION['cliente'] = $user['Nombre'];
-        $_SESSION['idc'] = $user['Id_Cliente'];
+        $_SESSION['cliente'] = $user['nombre'];
+        $_SESSION['idc'] = $user['id'];
         echo json_encode(['success' => 'Usuario creado correctamente', 'user' => $user]);
     } catch (PDOException $e) {
         echo json_encode(['error' => 'Error en la consulta: ' . $e->getMessage()]);

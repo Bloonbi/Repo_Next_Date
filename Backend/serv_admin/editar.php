@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "../controlador/conexion.php";
+require "./controlador/conexion.php";
 
 
 $nuevoNombre = $_POST['Nombre'];

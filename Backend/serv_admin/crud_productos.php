@@ -96,6 +96,7 @@
             $stmt->execute();
         
             echo json_encode(['success' => 'Producto eliminado correctamente']);
+            
         } else {
             echo json_encode(['error' => 'Acción no válida']);
         }

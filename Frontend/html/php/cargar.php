@@ -5,9 +5,14 @@ session_start();
     $idcliente =$_SESSION['idc'];
     try {
 
+  
+
+$sql = "SELECT * FROM  producto p
+        JOIN `carrito_compra` cc
+        ON cc.idProducto = p.idProd
+        WHERE idCliente = :idc";
 
 
-$sql = "SELECT * FROM carrito_compra WHERE Id_Cliente = :idc";
         $stmt = $con->prepare($sql);
         $stmt->bindParam(':idc' , $idcliente);
         $stmt->execute();

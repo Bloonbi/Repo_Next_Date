@@ -6,7 +6,7 @@ $idcliente = $_SESSION['idc'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtener la contraseña actual desde la base de datos
-    $sql = "SELECT Password FROM cliente WHERE Id_Cliente = :idc";
+    $sql = "SELECT Password FROM cliente WHERE id = :idc";
     $stmt = $con->prepare($sql);
     $stmt->bindParam(':idc', $idcliente);
     $stmt->execute();
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $currentPasswordHash = $ContraseñaCliente['Password'];
+    $currentPasswordHash = $ContraseñaCliente['password'];
 
     // Obtener la contraseña actual y nueva desde el formulario
     $contrasenaActual = $_POST['contrasenaActual'];

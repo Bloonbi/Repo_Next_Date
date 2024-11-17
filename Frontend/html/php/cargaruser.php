@@ -7,7 +7,7 @@ session_start();
 
 
 
-$sql = "SELECT * FROM cliente WHERE Id_Cliente = :idc";
+$sql = "SELECT * FROM cliente WHERE id = :idc";
         $stmt = $con->prepare($sql);
         $stmt->bindParam(':idc' , $idcliente);
         $stmt->execute();

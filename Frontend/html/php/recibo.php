@@ -7,7 +7,7 @@ session_start();
 
 
 
-$sql = "SELECT * FROM carrito_compra WHERE Id_Cliente = :idc";
+$sql = "SELECT * FROM carrito_compra WHERE idCliente = :idc";
         $stmt = $con->prepare($sql);
         $stmt->bindParam(':idc' , $idcliente);
         $stmt->execute();

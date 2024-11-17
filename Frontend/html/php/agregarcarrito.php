@@ -15,16 +15,15 @@ if (isset($_GET['producto'])) {
     $cantidad = 1;
 
 
-    $stmt = $con->prepare("SELECT Nombre, precio FROM producto WHERE Id_Producto = :Id_Producto");
+    $stmt = $con->prepare("SELECT nombre, precio FROM producto WHERE idProd = :Id_Producto");
     $stmt->bindParam(':Id_Producto', $idprod);
     $stmt->execute();
     $prod = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$precio = $prod['precio'];
-$nombre = $prod['Nombre'];
+   
 
     // Verificar si el producto ya está en el carrito
-    $stmt = $con->prepare("SELECT cantidad FROM carrito_compra WHERE Id_Producto = :Id_Producto AND Id_Cliente = :Id_Cliente");
+    $stmt = $con->prepare("SELECT cantidad FROM carrito_compra WHERE idProducto = :Id_Producto AND idCliente = :Id_Cliente");
     $stmt->bindParam(':Id_Producto', $idprod);
     $stmt->bindParam(':Id_Cliente', $idcliente);
     $stmt->execute();
@@ -32,9 +31,10 @@ $nombre = $prod['Nombre'];
     if ($stmt->rowCount() > 0) {
         // Si el producto ya está en el carrito, actualiza la cantidad
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $nuevaCantidad = $row['cantidad'] + 1;
-
-        $updateStmt = $con->prepare("UPDATE carrito_compra SET cantidad = :cantidad WHERE Id_Producto = :Id_Producto AND Id_Cliente = :Id_Cliente");
+        $nuevaCantidad = $_GET['cantidad'];
+        //$precio = $prod['precio'];
+        
+        $updateStmt = $con->prepare("UPDATE carrito_compra SET cantidad = :cantidad WHERE idProducto = :Id_Producto AND idCliente = :Id_Cliente");
         $updateStmt->bindParam(':cantidad', $nuevaCantidad);
         $updateStmt->bindParam(':Id_Producto', $idprod);
         $updateStmt->bindParam(':Id_Cliente', $idcliente);
@@ -42,13 +42,12 @@ $nombre = $prod['Nombre'];
 
         echo json_encode(array('message' => 'Cantidad actualizada en el carrito'));
     } else {
+        $cantidad = 1;
         // Si el producto no está en el carrito, inserta un nuevo registro
-        $stmt = $con->prepare("INSERT INTO carrito_compra (Id_Producto, Nombre, Precio, Id_Cliente, cantidad) VALUES (:Id_Producto, :Nombre, :precio, :Id_Cliente, :cantidad)");
-        $stmt->bindParam(':Id_Producto', $idprod);
-        $stmt->bindParam(':Nombre', $nombre);
-        $stmt->bindParam(':precio', $precio);
-        $stmt->bindParam(':Id_Cliente', $idcliente);
-        $stmt->bindParam(':cantidad', $cantidad);
+        $stmt = $con->prepare("INSERT INTO carrito_compra (idCliente, idProducto, cantidad) VALUES (:Id_Cliente,:Id_Producto, :cantidad)");
+      $stmt->bindParam(':Id_Cliente', $idcliente);
+               $stmt->bindParam(':Id_Producto', $idprod);
+  $stmt->bindParam(':cantidad',$cantidad);
         $stmt->execute();
 
         echo json_encode(array('message' => 'Producto agregado al carrito'));

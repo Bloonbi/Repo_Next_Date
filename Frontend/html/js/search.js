@@ -8,18 +8,18 @@ const galeria = document.getElementById("galeria");
 
 
 
-document.addEventListener("DOMContentLoaded", function (page=1) {
+document.addEventListener("DOMContentLoaded", function (page = 1) {
   fetch(`/cafee/backend/serv_admin/listar_productosfront.php?page=${page}`)
     .then(response => response.json())
     .then((data) => {
       console.log(data)
 
-    //Exito, Construccion de objetos
-        galeria.innerHTML = '';
-        data.producto.forEach(product => {
-            const productElement = document.createElement('div');
-            productElement.classList.add('product');
-            productElement.innerHTML = `
+      //Exito, Construccion de objetos
+      galeria.innerHTML = '';
+      data.producto.forEach(product => {
+        const productElement = document.createElement('div');
+        productElement.classList.add('product');
+        productElement.innerHTML = `
                 <h3>${product.nombre}</h3>
                 <p>${product.descripcion}</p>
                 <p>Precio: $${product.precio}</p>
@@ -27,106 +27,126 @@ document.addEventListener("DOMContentLoaded", function (page=1) {
                 <img src="/cafee/backend/serv_admin/${product.imagen}" alt="${product.nombre}">
                 <br>
                 <br>
-                <button onclick="editProduct(${product.idProd})">Comprar</button>
-                 <button onclick="editProduct(${product.idProd})">Añadir al carrito</button>
+                <button onclick="addToCart(${product.idProd})">Comprar</button>
             `;
-            galeria.appendChild(productElement);
+        galeria.appendChild(productElement);
       })
     })
     .catch((error) => {
-        console.error("Error", error);
-      });
+      console.error("Error", error);
+    });
+})
+
+
+
+
+function addToCart(idProd) {
+
+  fetch("./php/agregarcarrito.php?producto=" + idProd)
+    .then((response) => response.text())
+
+
+    .then((data) => {
+      console.log(data)
+      console.log(data.message);
+
+
+
     })
+    .catch((error) => {
+      console.error("Error",
+        alert("Necesitas iniciar sesion para poder comprar un producto."),
+        error);
+    });
 
-botoncarrito.addEventListener("click", function(){
-  
+}
+
+botoncarrito.addEventListener("click", function () {
+
   fetch("./php/validar.php")
-  .then((response) => response.json())
-     
+    .then((response) => response.json())
 
-  .then((data) => { 
 
-    if (data.success == false){
-      alert("Debes iniciar sesion para ir al carrito.")
-    }else{
-      window.location.href="../html/carrito.html"
-    }
+    .then((data) => {
 
-    console.log(data) 
+      if (data.success == false) {
+        alert("Debes iniciar sesion para ir al carrito.")
+      } else {
+        window.location.href = "../html/carrito.html"
+      }
 
-   })
-  .catch((error) => {
-    console.error("Error", error);
-  });
+      console.log(data)
+
+    })
+    .catch((error) => {
+      console.error("Error", error);
+    });
 
 })
 
 
- 
 
-producto.addEventListener("keyup", function(event) {
+
+producto.addEventListener("keyup", function (event) {
   var keyValue = event.key;
   var codeValue = event.code;
   if (codeValue == "Enter") {
-  fetch("./php/busqueda.php?producto=" + producto.value)
-    .then((response) => response.json())
-     
+    fetch("./php/busqueda.php?producto=" + producto.value)
+      .then((response) => response.json())
 
-    .then((data) => {
-      var prod = "";
-      for(var id = 0; id<data.length; id ++){
-      prod += `
+
+      .then((data) => {
+        var prod = "";
+        for (var id = 0; id < data.length; id++) {
+          prod += `
        <div class="col-md-4">
               <div class="container_main">
-              <h3>${data[id].Nombre}</h3>
-                 <h3>Descripcion: ${data[id].Descripcion}</h3>
-                 <h3 id=${data[id].Id_Producto}>${data[id].Precio}</h3>
-          <button id=${data[id].Id_Producto}  class="carrito fa fa-shopping-cart"></button>
+              <h3>${data[id].nombre}</h3>
+                 <h3>Descripcion: ${data[id].descripcion}</h3>
+                 <h3 id=${data[id].idProd}>${data[id].precio}</h3>
+          <button id=${data[id].idProd}  class="carrito fa fa-shopping-cart"></button>
           
+             <img src="/cafee/backend/serv_admin/${product.imagen}" alt="${product.nombre}">
 
-
-                <img src="images/img-1.png" alt="Avatar" class="image" />
+            
                 
               </div>
             </div>
              `;
-      }
-      div.innerHTML = prod;
-    })
-    .catch((error) => {
-      console.error("Error", error);
-    });
-  
-  
-    
-   
+        }
+        div.innerHTML = prod;
+      })
+      .catch((error) => {
+        console.error("Error", error);
+      });
+
+
+
+
   }
 
 });
-
+//busqueda
 boton.addEventListener("click", () => {
 
   fetch("./php/busqueda.php?producto=" + producto.value)
     .then((response) => response.json())
-     
+
 
     .then((data) => {
       var prod = "";
-      for(var id = 0; id<data.length; id ++){
-      prod += `
- <div class="col-md-4">
-              <div class="container_main">
-              <h3>${data[id].Nombre}</h3>
-                 <h3>Descripcion: ${data[id].Descripcion}</h3>
-                 <h3>Precio: ${data[id].Precio}</h3>
+      for (var id = 0; id < data.length; id++) {
+        prod += `
+      <div class="col-md-4">
+    <div class="container_main">
+        <h3>${data[id].nombre}</h3>
+        <h3>Descripcion: ${data[id].descripcion}</h3>
+        <h3>Precio: ${data[id].precio}</h3>
+        <button id=${data[id].idProd} class="carrito fa fa-shopping-cart"></button>
+  
+    </div>
+</div>
 
-          <button id=${data[id].Id_Producto}  class="carrito fa fa-shopping-cart"></button>
-          
-
-
-                <img src="images/img-1.png" alt="Avatar" class="image" />
-                
-              </div>
              `;
       }
       div.innerHTML = prod;
@@ -136,32 +156,8 @@ boton.addEventListener("click", () => {
     });
 });
 
-div.addEventListener("click", function(event) {
- 
- 
-  if (event.target.tagName === "BUTTON"){
-     fetch("./php/agregarcarrito.php?producto=" + event.target.id)
-     .then((response) => response.json())
-      
- 
-     .then((data) => {
- console.log(data.message);
-
-
- 
-     })
-     .catch((error) => {
-       console.error("Error",
-        alert ("Necesitas iniciar sesion para poder comprar un producto."),
-        error);
-     });
-
-  }
-
- 
-});
 
 
 
 
-    // window.location.href = "../html/gallery.html"
+// window.location.href = "../html/gallery.html"
