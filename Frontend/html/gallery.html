@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <!-- basic -->
     <meta charset="utf-8" />
@@ -48,44 +48,204 @@
           <div class="container-srh"></div>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
+              <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+              
+              <!--menu de seleccion de pagina -->
+              
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="about.html">Sobre nosotros</a>
+                  </li>
+                  <li class="nav-item">
+             
+                  </li>
+               <!--    <li class="nav-item">
+                    <a class="nav-link" href="services.html">Servicios</a>
+                  </li> -->
+                  <li class="nav-item">
+           
+
+  <a class="nav-link" href="./index.html">Inicio</a>
+              
+            
+              <!-- Boton Login -->
               <li class="nav-item">
-                <a class="nav-link" href="about.html">Sobre nosotros</a>
+                <a class="nav-link" href="#" id="login-link" data-toggle="modal" data-target="#loginModal">Iniciar sesión</a>
               </li>
+              <!-- Boton Register -->
               <li class="nav-item">
-                <a class="nav-link" href="gallery.html">Catalogo</a>
+                <a class="nav-link" href="#" id="register-link" data-toggle="modal" data-target="#registerModal">Registrarme</a>
               </li>
-           <!--    <li class="nav-item">
-                <a class="nav-link" href="services.html">Servicios</a>
-              </li> -->
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contactanos</a>
+              
+  
+              <li class="nav-item" id="user-options" style="display: none">
+                <ul class="nav-item" id="user-options" style="display: inline-flex">
+                <a class="nav-link" href="user.html" id="user-profile"> 
+                  <img class="userlogin" src="./images/user.png" alt=""> 
+                </a>
+  
+                <a class="nav-link" href="#" id="logout-link">
+                  <img class="logout" src="./images/logout.png" alt="">
+                </a>
+                <ul class="nav-item" id="user-options" style="display: inline-flex"></ul>
               </li>
-            </ul>
-          </div>
-              <li class="nav-item">
-                <a class="nav-link" href="#"
-                  ><i class="fa fa-search" aria-hidden="true"></i
-                ></a>
-              </li>
+              
+  
+              
             </ul>
           </div>
         </nav>
       </div>
     </div>
     <!--header section end -->
+  
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModalLabel">Iniciar sesión</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          <!-- Paginacion -->
+          <div id="paginationContainer" style="display: none"> </div>
+  
+          </div>
+          <div class="modal-body">
+            <form id="login-form">
+              <div class="form-group">
+                <label for="login-email">Dirección Email</label>
+                <input type="email" class="form-control" id="login-email" required />
+              </div>
+              <div class="form-group">
+                <label for="login-password">Contraseña</label>
+                <input type="password" class="form-control" id="login-password" required />
+              </div>
+              <button class="btn btn-primary" id="botonlogin">Ingresar</button>
+            </form>
+            <div id="login-message"></div>
+            <!-- Para mostrar mensajes de inicio de sesión -->
+          </div>
+        </div>
+      </div>
+    </div>
+ <!-- Register Modal -->
+ <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
+ aria-hidden="true">
+ <div class="modal-dialog" role="document">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title" id="registerModalLabel">Registro</h5>
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     <div class="modal-body">
+       <form id="registerForm">
+         <div class="form-group">
+           <label for="register-name">Nombre</label>
+           <input type="text" class="form-control" id="register-name" name="name" required />
+         </div>
+         <div class="form-group">
+           <label for="register-email">Dirección Email</label>
+           <input type="email" class="form-control" id="register-email" name="email" required />
+         </div>
+         <div class="form-group">
+           <label for="register-password">Contraseña</label>
+           <input type="password" class="form-control" id="register-password" name="password" required />
+         </div>
+         <div class="form-group">
+           <label for="register-address">Dirección</label>
+           <input type="text" class="form-control" id="register-address" name="address" required />
+         </div>
+         <div class="form-group">
+           <label for="register-phone">Teléfono</label>
+           <input type="text" class="form-control" id="register-phone" name="phone" required />
+         </div>
+         <button class="btn btn-primary" id="botonregistrar">
+           Registrar
+         </button>
+       </form>
+       <div id="register-message"></div>
+       <!-- Para mostrar mensajes de registro -->
+     </div>
+   </div>
+ </div>
+</div>
+  <!-- banner section start -->
+  <div class="gallerybanner_section layout_padding">
+    <div class="container">
+      <div id="main_slider" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="banner_taital">
+                  <h1 class="outstanding_text">Nuestro catlaogo</h1>
+          <div class="marcasdiv">
+                  <img class="marcas" src="./images/saint.png" alt="">
+
+                  <img class="marcas" src="./images/aguila.png" alt="">
+
+                  <img class="marcas" src="./images/bracafe.png" alt="">
+                </div>
+                  <!-- <div class="learnmore_bt"><a href="#">Learn More</a></div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="banner_taital">
+                  <h1 class="outstanding_text"></h1>
+                  <h1 class="outstanding_text">Nuestros Servicios</h1>
+                  <div id="result"></div>
+                  <p class="there_text">
+                 Ofrecemos un servicio de alta calidad para nuestros clientes.
+                  </p>
+                  <!-- <div class="learnmore_bt"><a href="#">Learn More</a></div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="banner_taital">
+                  <h1 class="outstanding_text"></h1>
+                  <h1 class="outstanding_text">Ofertas irresistibles</h1>
+                  <p class="there_text">
+                  Ofrecemos los mejores descuentos en el rubro de la Cafeteria.
+                  </p>
+                  <!-- <div class="learnmore_bt"><a href="#">Learn More</a></div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
+          <i class="fa fa-angle-left"></i>
+        </a>
+        <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
+          <i class="fa fa-angle-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- banner section end -->
     <!-- gallery section start -->
     <div class="gallery_section layout_padding">
       <div class="container">
@@ -95,131 +255,87 @@
             <p class="gallery_text">Cosechamos nuestros granos de café con eficiencia para darle un sabor único al café y poder brindar una mejor experiencia a nuestros clientes.
             </p>
           </div>
+
+
+
+          
+
+
+
+
+
+
+<!-- Modal (inicialmente oculto) -->
+<div id="pop" class="modal" style="display: none;">
+  <div class="modal-content">
+      <span class="close" id="closeModalBtn">&times;</span>
+      <h3 id="modalTitle">Detalle del Producto</h3>
+      <img id="modalImage" src="" alt="Imagen del producto" style="width: 100%; max-width: 300px; margin-bottom: 20px;">
+      <p id="modalDescription">Descripción del producto...</p>
+      <p id="modalPrice">Precio: $</p>
+  </div>
+</div>
+
+
+
+
+
+
+
+          
         </div>
-        <div class="">
-          <div class="gallery_section_2">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="container_main">
-                  <img src="images/img-1.png" alt="Avatar" class="image" />
-                  <div class="overlay">
-                    <div class="text">
-                      <a href="#"
-                        ><i class="fa fa-search" aria-hidden="true"></i
-                      ></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="container_main">
-                  <img src="images/img-2.png" alt="Avatar" class="image" />
-                  <div class="overlay">
-                    <div class="text">
-                      <a href="#"
-                        ><i class="fa fa-search" aria-hidden="true"></i
-                      ></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="container_main">
-                  <img src="images/img-3.png" alt="Avatar" class="image" />
-                  <div class="overlay">
-                    <div class="text">
-                      <a href="#"
-                        ><i class="fa fa-search" aria-hidden="true"></i
-                      ></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="gallery_section_2">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="container_main">
-                  <img src="images/img-4.png" alt="Avatar" class="image" />
-                  <div class="overlay">
-                    <div class="text">
-                      <a href="#"
-                        ><i class="fa fa-search" aria-hidden="true"></i
-                      ></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="container_main">
-                  <img src="images/img-5.png" alt="Avatar" class="image" />
-                  <div class="overlay">
-                    <div class="overlay">
-                      <div class="text">
-                        <a href="#"
-                          ><i class="fa fa-search" aria-hidden="true"></i
-                        ></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="container_main">
-                  <img src="images/img-6.png" alt="Avatar" class="image" />
-                  <div class="overlay">
-                    <div class="overlay">
-                      <div class="text">
-                        <a href="#"
-                          ><i class="fa fa-search" aria-hidden="true"></i
-                        ></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="gallery_section_2">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="container_main">
-                  <img src="images/img-7.png" alt="Avatar" class="image" />
-                  <div class="overlay">
-                    <div class="text">
-                      <a href="#"
-                        ><i class="fa fa-search" aria-hidden="true"></i
-                      ></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="container_main">
-                  <img src="images/img-8.png" alt="Avatar" class="image" />
-                  <div class="overlay">
-                    <div class="text">
-                      <a href="#"
-                        ><i class="fa fa-search" aria-hidden="true"></i
-                      ></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="container_main">
-                  <img src="images/img-9.png" alt="Avatar" class="image" />
-                  <div class="overlay">
-                    <div class="text">
-                      <a href="#"
-                        ><i class="fa fa-search" aria-hidden="true"></i
-                      ></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+   
+
+        <li class="nav-item">
+          <input type="text" id="buscar-producto" placeholder="Busque un producto" />
+          <button id="buscar-btn">   
+            <li class="nav-item">
+            <a>
+              <i class="fa fa-search" aria-hidden="true">
+                
+              </i>
+            </a>
+          </li>
+          </button>
+  
+          
+          <a id="botoncarrito"><i class="carrito fa fa-shopping-cart"></i></a>
+          
+  
+      </li>
+      <h2 id="hpromo">Productos Con Promocion</h2>
+      <div id="galeriapromo">
+        
+  
+  
+      </div>
+      <h2 id="h2promo">Productos Sin Promocion</h2>
+      <div id="galeria">
+  
+  
+      </div>
+  
+  
+  
+      <script id="ListadoProds" src="js/search.js"></script>
+      <script src="
+  https://cdn.jsdelivr.net/npm/sweetalert2@11.14.4/dist/sweetalert2.all.min.js
+  "></script>
+<!-- Modal de Carrito -->
+<div id="modal-carrito" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Producto Agregado al Carrito</h3>
+    <img id="modal-imagen" src="" alt="Imagen del Producto">
+    <p id="modal-nombre"></p>
+    <p id="modal-precio"></p>
+    <button id="seguir-comprando" class="btn">Seguir comprando</button>
+    <button id="ver-carrito" class="btn">Ver carrito</button>
+  </div>
+</div>
+
+
+                    
           </div>
         </div>
         <!-- <div class="seemore_bt"><a href="#">See More</a></div> -->
@@ -231,11 +347,7 @@
         <div class="row">
           <div class="col-lg-3 col-sm-6">
             <h3 class="useful_text">About</h3>
-            <p class="footer_text">
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-              nostrud exercitation u
-            </p>
+        
           </div>
           <div class="col-lg-3 col-sm-6">
             <h3 class="useful_text">Menu</h3>
@@ -243,17 +355,13 @@
               <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="about.html">Acerca de nosotros</a></li>
-                <li><a href="gallery.html">Galeria</a></li>
-                <li><a href="services.html">Servicios</a></li>
-                <li><a href="contact.html">Contactos</a></li>
+ 
+            
+         
               </ul>
             </div>
           </div>
-          <div class="col-lg-3 col-sm-6">
-            <h1 class="useful_text">Useful Link</h1>
-            <p class="dummy_text">
-              Adipiscing Elit, sed do Eiusmod Tempor incididunt
-            </p>
+      
           </div>
           <div class="col-lg-3 col-sm-6">
             <h1 class="useful_text">Contectenos</h1>
@@ -300,5 +408,23 @@
     <!-- sidebar -->
     <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="js/custom.js"></script>
+     <!-- Javascript files-->
+  <script src="js/search.js"></script>
+  <script src="js/login.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/pop.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/jquery-3.0.0.min.js"></script>
+  <script src="js/plugin.js"></script>
+  <script src="js/custom.js"></script>
+  <script src="js/botonlogout.js"></script>
+  <!-- <script src="js/formloginregister.js"></script> -->
+  <script src="js/auth.js"></script>
+
+
+  <!-- sidebar -->
+  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="js/custom.js"></script>
   </body>
 </html>

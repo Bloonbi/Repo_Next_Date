@@ -21,13 +21,15 @@
 					<h1 id="logo"><a href="#">Cafetería Imperial</a></h1>
 					<p>En nuestra cafetería queremos que sientas el sabor del café grano a grano<br /> </p>
 				</header>
-				<nav id="nav" style="display: none";>
+				<nav id="nav">
 					<ul>		
-						<li><a id="añadirProducto">Añadir Producto</a></li>
-
+						<li><a id="registrarcliente">Registrar Cliente</a></li>
 						<li><a id="modificarDatos">Modificar datos de empresa</a></li>
 						<li><a id="loadProducts">Ver productos</a></li>
+						<li><a id="añadirProducto">Añadir Producto</a></li>
+						<li><a id="vercompras">Ver Compras</a></li>
 						<li><a id="logout">Logout</a></li>
+						
 					</ul>
 				</nav>
 				<footer>
@@ -40,8 +42,7 @@
 
 				<!-- Main -->
 					<div id="main">
-
-				
+			
 						<!-- Four -->
 							<section id="four">
 								<div class="container">
@@ -69,7 +70,7 @@
 									</div>
 
 									<!-- formulario de registro --> 								
-									<div id="registrarProductoVentana" style="display:none";>
+									<div id="registrarProductoVentana">
 									<h3>Añadir Producto</h3>
 									<form id="registrarProducto" enctype="multipart/form-data">
 
@@ -97,9 +98,9 @@
 								<div id="productContainer"> </div>
 
 									<!-- Paginacion-->
-								<div id="paginationContainer" style="display: none"> </div>
+								<div id="paginationContainer"> </div>
 							</section>
-							<div id="formModificarEmpresa"style="display: none">
+							<div id="formModificarEmpresa">
 								<h1>Modificar datos de empresa</h1>
 								<label for="nombre">Nombre:</label><br>
 								<input type="text" id="nombremod" name="nombremod" required><br>
@@ -122,8 +123,6 @@
 
 							
 						</div>
-						
-
 					</div>
 
 				<!-- Footer -->

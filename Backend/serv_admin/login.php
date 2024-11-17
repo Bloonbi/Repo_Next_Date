@@ -32,6 +32,6 @@ if ($username && $password) {
         echo json_encode(['error' => 'Error en la consulta: ' . $e->getMessage()]);
     }
 } else {
-    echo json_encode(['error' => 'Username y password son requeridos']);
+    echo json_encode(['error' => 'Nombre y contraseña son requeridos']);
 }
 ?>

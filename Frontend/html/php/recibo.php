@@ -7,7 +7,10 @@ session_start();
 
 
 
-$sql = "SELECT * FROM carrito_compra WHERE idCliente = :idc";
+$sql = "SELECT * FROM  producto p
+        JOIN `carrito_compra` cc
+        ON cc.idProducto = p.idProd
+        WHERE idCliente = :idc";
         $stmt = $con->prepare($sql);
         $stmt->bindParam(':idc' , $idcliente);
         $stmt->execute();

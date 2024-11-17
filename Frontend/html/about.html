@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <!-- basic -->
     <meta charset="utf-8" />
@@ -9,14 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
     <!-- site metas -->
-    <title>About</title>
+    <title>Cafeteria Imperial</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
     <!-- bootstrap css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
     <!-- style css -->
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+  
     <!-- Responsive-->
     <link rel="stylesheet" href="css/responsive.css" />
     <!-- fevicon -->
@@ -24,68 +24,165 @@
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css" />
     <!-- Tweaks for older IEs-->
-    <link
-      rel="stylesheet"
-      href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
-    />
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
     <!-- owl stylesheets -->
     <link rel="stylesheet" href="css/owl.carousel.min.css" />
     <link rel="stylesheet" href="css/owl.theme.default.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
-      media="screen"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+      media="screen" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
   </head>
   <body>
-    <!--header section start -->
-    <div class="header_section">
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="logo">
-            <a href="index.html"><img src="images/logo.png" class="imglogo" /></a>
-          </div>
-          <div class="container-srh"></div>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
+    <body>
+      <!--header section start -->
+      <div class="header_section">
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="logo">
+              <a href="index.html"><img src="images/logo.png" class="imglogo" /></a>
+            </div>
+            <div class="container-srh"></div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+                
+                <!--menu de seleccion de pagina -->
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                 
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="gallery.html">Catalogo</a>
+                    </li>
+                 <!--    <li class="nav-item">
+                      <a class="nav-link" href="services.html">Servicios</a>
+                    </li> -->
+                    <li class="nav-item">
+                
+                  <a class="nav-link" href="./index.html">Inicio</a>
+                
+              
+                <!-- Boton Login -->
+                <li class="nav-item">
+                  <a class="nav-link" href="#" id="login-link" data-toggle="modal" data-target="#loginModal">Iniciar sesión</a>
+                </li>
+                <!-- Boton Register -->
+                <li class="nav-item">
+                  <a class="nav-link" href="#" id="register-link" data-toggle="modal" data-target="#registerModal">Registrarme</a>
+                </li>
+                
+    
+                <li class="nav-item" id="user-options" style="display: none">
+                  <ul class="nav-item" id="user-options" style="display: inline-flex">
+                  <a class="nav-link" href="user.html" id="user-profile"> 
+                    <img class="userlogin" src="./images/user.png" alt=""> 
+                  </a>
+    
+                  <a class="nav-link" href="#" id="logout-link">
+                    <img class="logout" src="./images/logout.png" alt="">
+                  </a>
+                  <ul class="nav-item" id="user-options" style="display: inline-flex"></ul>
+                </li>
+                
+    
+                
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <!--header section end -->
+
+       <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">Iniciar sesión</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="about.html">Sobre nosotros</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="gallery.html">Catalogo</a>
-              </li>
-           <!--    <li class="nav-item">
-                <a class="nav-link" href="services.html">Servicios</a>
-              </li> -->
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contactanos</a>
-              </li>
-            </ul>
-          </div>
-              <li class="nav-item">
-                <a class="nav-link" href="#"
-                  ><i class="fa fa-search" aria-hidden="true"></i
-                ></a>
-              </li>
-            </ul>
-          </div>
-        </nav>
+        <!-- Paginacion -->
+        <div id="paginationContainer" style="display: none"> </div>
+
+        </div>
+        <div class="modal-body">
+          <form id="login-form">
+            <div class="form-group">
+              <label for="login-email">Dirección Email</label>
+              <input type="email" class="form-control" id="login-email" required />
+            </div>
+            <div class="form-group">
+              <label for="login-password">Contraseña</label>
+              <input type="password" class="form-control" id="login-password" required />
+            </div>
+            <button class="btn btn-primary" id="botonlogin">Ingresar</button>
+          </form>
+          <div id="login-message"></div>
+          <!-- Para mostrar mensajes de inicio de sesión -->
+        </div>
       </div>
     </div>
-    <!--header section end -->
+  </div>
+
+  <!-- Register Modal -->
+  <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registerModalLabel">Registro</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="registerForm">
+            <div class="form-group">
+              <label for="register-name">Nombre</label>
+              <input type="text" class="form-control" id="register-name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="register-email">Dirección Email</label>
+              <input type="email" class="form-control" id="register-email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="register-password">Contraseña</label>
+              <input type="password" class="form-control" id="register-password" name="password" required />
+            </div>
+            <div class="form-group">
+              <label for="register-address">Dirección</label>
+              <input type="text" class="form-control" id="register-address" name="address" required />
+            </div>
+            <div class="form-group">
+              <label for="register-phone">Teléfono</label>
+              <input type="text" class="form-control" id="register-phone" name="phone" required />
+            </div>
+            <button class="btn btn-primary" id="botonregistrar">
+              Registrar
+            </button>
+          </form>
+          <div id="register-message"></div>
+          <!-- Para mostrar mensajes de registro -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
     <!-- Inicio del sobre nosotros -->
     <div class="about_section layout_padding">
       <div class="container">
@@ -157,12 +254,16 @@
     </div>
     <!-- about section end -->
     <!-- footer section start -->
-    <div class="footer_section layout_padding margin_top90">
+    <div class="footer_section layout_padding">
       <div class="container">
         <div class="row">
           <div class="col-lg-3 col-sm-6">
             <h3 class="useful_text">Sobre nosotros</h3>
             <p class="footer_text">
+              Somos una cafetería local ubicada en Avénida General. Jose Artigas, 15800 Montevideo, Departamento Canelones. 
+              Ofrecemos los mejores servicios de atencion al cliente y nuestras marcas colaboradoras son las mejores en el país. 
+              Tenemos una amplia gama de cafés y postres disponibles en nuestro catalago para tu disfrute.
+            </p>
             
             </p>
           </div>
@@ -170,22 +271,16 @@
             <h3 class="useful_text">Menú</h3>
             <div class="footer_menu">
               <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="about.html">Sobre nosotros</a></li>
+         
                 <li><a href="gallery.html">Galeria</a></li>
-                <li><a href="services.html">Servicios</a></li>
-                <li><a href="contact.html">Contactos</a></li>
+                <li><a href="index.html">Inicio</a></li>
+             
               </ul>
             </div>
           </div>
+       
           <div class="col-lg-3 col-sm-6">
-            <h1 class="useful_text">Useful Link</h1>
-            <p class="dummy_text">
-              Adipiscing Elit, sed do Eiusmod Tempor incididunt
-            </p>
-          </div>
-          <div class="col-lg-3 col-sm-6">
-            <h1 class="useful_text">Contactanos</h1>
+       
             <div class="location_text">
               <ul>
                 <li>
@@ -221,12 +316,19 @@
     </div>
     <!-- copyright section end -->
     <!-- Javascript files-->
-    <script src="js/about.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/login.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery-3.0.0.min.js"></script>
     <script src="js/plugin.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="js/botonlogout.js"></script>
+    <!-- <script src="js/formloginregister.js"></script> -->
+    <script src="js/auth.js"></script>
+  
+  
     <!-- sidebar -->
     <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="js/custom.js"></script>

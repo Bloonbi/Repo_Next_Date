@@ -50,12 +50,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       prod += `<h2>Total General: ${totalGeneral}</h2>`;
       
       div.innerHTML = prod;
-      div.innerHTML += `
-      <div class="botones">
-      <button onclick="limpiar()" id="limpiarcarrito">Limpiar</button>
-      <button id="comprobarcarrito">Comprar</button>
-      </div>
-      `
+
+      
     })
     .catch((error) => {
       console.error("Error", error);
@@ -75,18 +71,15 @@ function eliminarproductocarro(id){
 
 }
 
-
 function limpiar() {
   fetch("./php/limpiarcarrito.php")
     .then((response) => response.json())
           
     .then((data) => { 
+     
       div.innerHTML = `
       <h2>Total General: ${0}</h2>
-      <div class="botones">
-      <button onclick="limpiar()" id="limpiarcarrito">Limpiar</button>
-      <button onclick="comprobarcarrito()" id="comprobarcarrito">Comprar</button>
-      </div>
+
       `
     })
 
@@ -99,11 +92,11 @@ function comprobarcarrito(){
        
   
     .then((data) => { 
-  
+      console.log(data)
       if (data.success == false){
         alert("Debes añadir almenos un producto al carrito.")
       }else{
-          window.location.href = "../html/recibo.html"
+          window.location.href = "../html/recibo.php"
       }
   
       console.log(data) 
@@ -112,7 +105,7 @@ function comprobarcarrito(){
     .catch((error) => {
       console.error("Error", error);
     });
-  
+    setTimeout(limpiar, 500);
   }
   
  function actualizarcantidad(cantidad,idp){

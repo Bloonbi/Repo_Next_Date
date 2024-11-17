@@ -175,7 +175,7 @@ ol {
 }
 
 p {
-  margin: 20px;
+  margin: 10px;
   font-weight: 300;
   font-size: 15px;
   line-height: 24px;
@@ -210,6 +210,10 @@ img {
 .paddind_bottom_0 {
   padding-bottom: 0 !important;
 }
+
+
+
+
 
 .btn-custom {
   margin-top: 20px;
@@ -280,6 +284,18 @@ button {
   background-color: #914730;
   height: auto;
   background-size: 100%;
+  box-shadow: 0px 10px 15px -2px rgba(0,0,0,1);
+  -webkit-box-shadow: 7px 10px 15px -2px rgba(0,0,0,1);
+  -moz-box-shadow: 7px 10px 15px -2px rgba(0,0,0,1);
+}
+.container-fluid{
+  box-shadow: 0px 10px 15px -2px rgba(0,0,0,1);
+  -webkit-box-shadow: 7px 10px 15px -2px rgba(0,0,0,1);
+  -moz-box-shadow: 7px 10px 15px -2px rgba(0,0,0,1);
+
+z-index: 1000;
+
+
 }
 
 .bg-light {
@@ -293,8 +309,9 @@ button {
   width: 100%;
   float: left;
   background: #10e2bd;
-  height: 80px;
+  height: 70px;
 }
+
 
 .navbar-light .navbar-nav .active > .nav-link,
 .navbar-light .navbar-nav .nav-link.active,
@@ -337,12 +354,31 @@ button {
 /* header section end */
 
 /* banner section start */
+.gallerybanner_section {
+ 
+  width: 100%;
+  float: left;
+  background-image: url(../images/gallerybanner.png);
+  image-resolution: 100%;
+  height: 
+  65vh;
+
+  text-decoration-color: #080707;
+
+  background-size: 100%;
+  padding: 10px 0px 25px 0px;
+  background-repeat: no-repeat;
+}
 
 .banner_section {
+ z-index: -1;
   width: 100%;
   float: left;
   background-image: url(../images/banner-bg.png);
-  height: auto;
+  image-resolution: 100%;
+  height: 
+  65vh;
+
   background-size: 100%;
   padding: 10px 0px 25px 0px;
   background-repeat: no-repeat;
@@ -623,7 +659,71 @@ a:hover {
 
 /* services section start */
 
+
+
+
+/* seccion marcas  */
+
+/* Estilo para el contenedor de las imágenes */
+.marcasdiv {
+display:inline-flex;
+
+}
+
+
+
+/* Estilo para el contenedor de los elementos dentro de #user-options */
+#user-options {
+  display: flex;           /* Usamos Flexbox para alinear los elementos horizontalmente */
+  gap: 15px;               /* Espacio entre los elementos */
+
+}
+
+/* Estilo para los enlaces dentro de #user-options */
+#user-options .nav-link {
+  display: flex;           /* Asegura que los elementos dentro de los enlaces también se alineen bien */
+  align-items: center;     /* Centra las imágenes dentro de los enlaces */
+  padding: 5px 10px;       /* Puedes ajustar el padding según sea necesario */
+
+}
+
+
+
+
+
+
+img.logout{
+display: inline-flex;
+max-width: 40px;
+max-height: 40px;
+
+}
+.userlogin{
+  max-width: 40px;
+  max-height: 40px;
+  display: inline-flex;
+}
+
+/* Estilo para el contenedor de las marcas */
+.marcas {
+  margin-left: 0; /* Asegura que el contenedor no tenga margen izquierdo */
+  padding-left: 0; /* Asegura que el contenedor no tenga relleno izquierdo */
+}
+
+/* Estilo para la imagen dentro del contenedor .marcas */
+img.marcas {
+  margin-left: 0; /* Elimina cualquier margen izquierdo de la imagen */
+  padding-left: 0; /* Elimina cualquier relleno izquierdo */
+  max-height: 70px; /* Limita la altura máxima de la imagen */
+  max-width: 70px; /* Limita el ancho máximo de la imagen */
+  display: block; /* Hace que la imagen sea un bloque y elimine el espacio extra debajo */
+}
+
+
 .services_section {
+  
+  
+  
   width: 100%;
   float: left;
   background-image: url(../images/services-bg.png);
@@ -632,7 +732,25 @@ a:hover {
   background-attachment: fixed;
 }
 
+
+
+.listadmrd{
+
+display: inline-flex;
+
+}
+
+
 .services_taital {
+
+  width: 100%;
+  float: left;
+  font-size: 60px;
+  color: white;
+  padding-bottom: 0px;
+  font-family: 'Lucida Sans Unicode';
+  font-style: italic; /* Agrega estilo cursiva */
+  text-shadow: 2px 0 3px rgba(0, 0, 0, 0.5); /* Sombra de contorno a la derecha */
   width: 100%;
   float: left;
   font-size: 40px;
@@ -695,6 +813,37 @@ a:hover {
 .box_main:hover .tation_text {
   color: #000;
 }
+
+/*Galeria*/
+#galeriapromo {
+  display: flex; 
+  flex-wrap: wrap;
+  width: 100vw;
+  overflow: hidden; 
+  margin: 0; 
+  padding: 0; 
+}
+
+.product {
+  display: flex;
+  flex-direction: column; 
+  justify-content: flex-end; 
+  flex: 1 1 20%; 
+  max-width: 20%; 
+  box-sizing: border-box; 
+  padding: 10px; 
+}
+
+.product img {
+  width: 75%; 
+  height: auto; 
+  aspect-ratio: 1 / 1; 
+  object-fit: cover; 
+  display: block; 
+  margin: 0 auto;
+}
+
+
 
 .box_main:hover .readmore_bt {
   display: block;
@@ -760,6 +909,103 @@ a:hover {
   width: 100%;
   float: left;
 }
+
+.tarjetaH1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  padding: 20px;
+  
+}
+
+
+/* Estilo general para la sección tarjeta */
+.tarjeta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Asegura que la sección ocupe toda la altura de la ventana */
+  background-image: url(../images/asdasdasd.jpg);
+
+  padding: 20px;
+  box-sizing: border-box; /* Asegura que el padding no afecte el tamaño */
+}
+
+/* Contenedor de las cajas de imagen (tarjeta_content) */
+.tarjeta_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px; /* Espacio entre las cajas */
+  max-width: 1200px; /* Limita el ancho máximo para que no se extienda demasiado */
+  width: 100%;
+  flex-wrap: wrap; /* Permite que las cajas se ajusten en pantallas pequeñas */
+}
+
+/* Caja que contiene cada imagen (tarjeta_box_main) */
+.tarjeta_box_main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #B15741; /* Color de fondo café */
+  padding: 30px; /* Aumentamos el padding para que las cajas sean más grandes */
+  border-radius: 10px; /* Bordes redondeados */
+  width: 100%; /* Asegura que la caja ocupe el 100% de su contenedor */
+  max-width: 350px; /* Aumentamos el ancho máximo de cada caja */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para dar profundidad */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto hover en la caja */
+.tarjeta_box_main:hover {
+  transform: translateY(-10px); /* Desplaza la caja ligeramente hacia arriba */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+/* Icono de la casa dentro de cada caja */
+.tarjeta_house_icon {
+  position: relative;
+  width: 200px; /* Cambiamos el tamaño de la imagen a 200px */
+  height: 200px; /* Mantenemos la altura igual al ancho para que sea cuadrada */
+  margin-bottom: 20px;
+  overflow: hidden; /* Asegura que las imágenes no se desborden */
+}
+
+/* Las imágenes dentro de la caja deben ser siempre cuadradas y no mayores a 200px */
+.tarjeta_house_icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Hace que la imagen se recorte para llenar el contenedor sin deformarse */
+}
+
+/* Título de cada servicio */
+.tarjeta_decorate_text {
+  font-size: 20px; /* Aumentamos el tamaño de la fuente para que se vea más grande */
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Botón de "Leer más" */
+.tarjeta_readmore_bt a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: #353535; /* Color verde para el botón */
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+/* Cambio de color al hacer hover sobre el botón */
+.tarjeta_readmore_bt a:hover {
+  background-color: #d89a67; /* Verde más oscuro */
+}
+
 
 .client_taital {
   width: 100%;

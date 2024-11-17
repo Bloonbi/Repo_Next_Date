@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async() =>{
  
                 </div>
               </div>
-              <hr>
+             
                `;
         }
         div.innerHTML = prod;

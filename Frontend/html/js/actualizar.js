@@ -24,15 +24,34 @@ actu.addEventListener("click", () =>{
     
     .then((response) => response.json())
           
-    .then((data) => { 
-      alert(data.message);
-
-
+    .then((data) => {
+      console.log(data);
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Datos modificados con exito"
+      });
     })
     .catch((error) => {
-      console.error("Error", error);
-    })
-
+      Swal.fire({
+        icon: "error",
+        title: "Error al modificar datos",
+        text: error.message,
+      });
+    });
+    setTimeout(function(){
+      window.location.reload();
+   }, 2000);
   });
 
   

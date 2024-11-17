@@ -4,6 +4,30 @@ const div = document.getElementById("galeria");
 const botoncarrito = document.getElementById("botoncarrito");
 const galeria = document.getElementById("galeria");
 const galeriapromociones = document.getElementById("galeriapromo");
+// Referencias al modal y su botón de cierre
+// Simulamos los datos del producto (esto normalmente vendría de una base de datos)
+const products = {
+  id: { // Producto 1
+      nombre: "Producto 1",
+      imagen: "producto1.jpg", // Cambia esta ruta por una imagen real
+      descripcion: "Descripción del Producto 1",
+      precio: 20.99
+  },
+  102: { // Producto 2
+      nombre: "Producto 2",
+      imagen: "producto2.jpg", // Cambia esta ruta por una imagen real
+      descripcion: "Descripción del Producto 2",
+      precio: 25.99
+  },
+  103: { // Producto 3 (puedes añadir más productos con diferentes idProd)
+      nombre: "Producto 3",
+      imagen: "producto3.jpg", // Cambia esta ruta por una imagen real
+      descripcion: "Descripción del Producto 3",
+      precio: 30.99
+  }
+};
+
+
 
 document.addEventListener("DOMContentLoaded", function (page = 1) {
   fetch(`/cafee/backend/serv_admin/listar_productosfront.php?page=${page}`)
@@ -11,20 +35,25 @@ document.addEventListener("DOMContentLoaded", function (page = 1) {
     .then((data) => {
       console.log(data)
 
-      //Exito, Construccion de objetos
+
+
+
+      //Productos en galería principal
+  
       galeria.innerHTML = '';
       data.producto.forEach(product => {
         const productElement = document.createElement('div');
         productElement.classList.add('product');
         productElement.innerHTML = `
                 <h3>${product.nombre}</h3>
-                <p>${product.descripcion}</p>
+               
                 <p>Precio: $${product.precio}</p>
-                <p>Cantidad: ${product.cantidad}</p>
-                <img src="/cafee/backend/serv_admin/${product.imagen}" alt="${product.nombre}">
+          
+                <img src="/cafee/backend/serv_admin/${product.imagen}" alt="${product.nombre} onclick="pop(${product.idProd}) ">
                 <br>
                 <br>
                 <button onclick="addcart(${product.idProd})" id=${product.idProd} class="carrito fa fa-shopping-cart"></button>
+                  <button onclick="openModal(${product.idProd})" id="openModalBtn-${product.idProd}" class="modal-btn">Ver Detalles</button>
             `;
         galeria.appendChild(productElement);
       })
@@ -38,30 +67,43 @@ document.addEventListener("DOMContentLoaded", function (page = 1) {
     .then((data) => {
       console.log(data)
 
-      //Exito, Construccion de objetos
+       
       galeriapromociones.innerHTML = '';
       data.producto.forEach(product => {
         const productElement = document.createElement('div');
+        let pepe= ((product.precio * product.porcentaje)  / 100);
+          if(product.promocion >0){
+           total = product.precio - pepe;
+           precionuevo = `
+            <p> Precio Anterior: $${product.precio}</p>
+            <p> Porcentaje de Promocion: ${product.porcentaje}%</p>
+            <p> Precio Promocionado: $${product.precio - pepe}</p>
+           `
+        }else {
+          precionuevo = `
+          <p> Precio: $${product.precio}</p>
+         `
+        }
         productElement.classList.add('product');
+        
+        //Productos de promoción
         productElement.innerHTML = `
                 <h3>${product.nombre}</h3>
-                <p>${product.descripcion}</p>
-                <p>Precio Anterior: $${product.precio}</p>
-                <p class="precionuevo">Precio Nuevo:</p>
-                <p>Cantidad: ${product.cantidad}</p>
-                <img src="/cafee/backend/serv_admin/${product.imagen}" alt="${product.nombre}">
+                ${precionuevo}
+                <img src="/cafee/backend/serv_admin/${product.imagen}" alt="${product.nombre} onclick="pop(${product.idProd})">
                 <br>
                 <br>
                 <button onclick="addcart(${product.idProd})" id=${product.idProd} class="carrito fa fa-shopping-cart"></button>
+             <button onclick="openModal(${product.idProd})" id="openModalBtn-${product.idProd}" class="modal-btn">Ver Detalles</button>
             `;
         galeriapromociones.appendChild(productElement);
+        
       })
     })
     .catch((error) => {
       console.error("Error", error);
     });
 })
-
 
 
 
@@ -126,25 +168,41 @@ producto.addEventListener("keyup", function (event) {
 
 
       .then((data) => {
+        
         var prod = "";
-        for (var id = 0; id < data.length; id++) {
-          prod += `
-       <div class="col-md-4">
-              <div class="container_main">
-              <h3>${data[id].nombre}</h3>
-                 <h3>Descripcion: ${data[id].descripcion}</h3>
-                 <h3 id=${data[id].idProd}>${data[id].precio}</h3>
-          <button onclick="addcart(${data[id].idProd})" id=${data[id].idProd} class="carrito fa fa-shopping-cart"></button>
+        galeria.innerHTML = '';
+        data.forEach(product => {
+          const productElement = document.createElement('div');
+        let pepe= ((product.precio * product.porcentaje)  / 100);
+          if(product.promocion >0){
+           total = product.precio - pepe;
+           precionuevo = `
+            <p> Precio Anterior: $${product.precio}</p>
+            <p> Precio Promocionado: $${product.precio - pepe}</p>
+           `
+        }else {
+          precionuevo = `
+          <p> Precio: $${product.precio}</p>
           
-             <img src="/cafee/backend/serv_admin/${product.imagen}" alt="${product.nombre}">
-
-            
-                
-              </div>
-            </div>
-             `;
+         `
         }
-        div.innerHTML = prod;
+        productElement.classList.add('product');
+        
+        //productos en busqueda enter
+        productElement.innerHTML = `
+                <h3>${product.nombre}</h3>
+                ${precionuevo}
+                <img src="/cafee/backend/serv_admin/${product.imagen}" alt="${product.nombre} onclick="pop(${product.idProd}) ">
+                <br>
+                <br>
+                <button onclick="addcart(${product.idProd})" id=${product.idProd} class="carrito fa fa-shopping-cart"></button>
+       <button onclick="openModal(${product.idProd})" id="openModalBtn-${product.idProd}" class="modal-btn">Ver Detalles</button>
+
+            `;
+        galeria.appendChild(productElement);
+        
+
+        })
       })
       
       .catch((error) => {
@@ -157,7 +215,7 @@ producto.addEventListener("keyup", function (event) {
   }
 
 });
-//busqueda
+//busqueda click
 boton.addEventListener("click", () => {
 
   fetch("./php/busqueda.php?producto=" + producto.value)
@@ -166,23 +224,37 @@ boton.addEventListener("click", () => {
       console.log(data)
             //Exito, Construccion de objetos
             galeria.innerHTML = '';
-            for (var id = 0; id < data.length; id++){
-              const productElement = document.createElement('div');
-              productElement.classList.add('product');
-              productElement.innerHTML = `
-                      <h3>${data[id].nombre}</h3>
-                      <p>${data[id].descripcion}</p>
-                      <p>Precio Anterior: $${data[id].precio}</p>
-                      <p class="precionuevo">Precio Nuevo:</p>
-                      <p>Cantidad: ${data[id].cantidad}</p>
-                      <img src="/cafee/backend/serv_admin/${data[id].imagen}" alt="${data[id].nombre}">
-                      <br>
-                      <br>
-                      <button onclick="addcart(${data[id].idProd})" id=${data[id].idProd} class="carrito fa fa-shopping-cart"></button>
-                  `;
-              galeria.appendChild(productElement);
 
-            }
+             data.forEach(product => {
+          const productElement = document.createElement('div');
+        let pepe= ((product.precio * product.porcentaje)  / 100);
+          if(product.promocion >0){
+           total = product.precio - pepe;
+           precionuevo = `
+            <p> Precio Anterior: $${product.precio}</p>
+            <p> Precio Promocionado: $${product.precio - pepe}</p>
+           `
+        }else {
+          precionuevo = `
+          <p> Precio: $${product.precio}</p>
+         `
+        }
+        productElement.classList.add('product');
+        
+        
+        productElement.innerHTML = `
+                <h3>${product.nombre}</h3>
+                ${precionuevo}
+                <img src="/cafee/backend/serv_admin/${product.imagen}" alt="${product.nombre} onclick="pop(${product.idProd}) ">
+                <br>
+                <br>
+                <button onclick="addcart(${product.idProd})" id=${product.idProd} class="carrito fa fa-shopping-cart"></button>
+                  <button onclick="openModal(${product.idProd})" id="openModalBtn-${product.idProd}" class="modal-btn">Ver Detalles</button>
+            `;
+        galeria.appendChild(productElement);
+        
+
+        })
     })
   
     .catch((error) => {
@@ -224,3 +296,34 @@ function addcart(id) {
       });
     });
 }
+
+function openModal(idProd) {
+  // Verificamos si el producto existe en el objeto
+  if (product[idProd]) {
+      console.error("Producto no encontrado con idProd:", idProd);
+      return; // Si no se encuentra el producto, no hacemos nada
+  }
+
+  // Actualizamos los datos del modal con la información del producto
+  document.getElementById('modalTitle').innerText = products[idProd].nombre;
+  document.getElementById('modalImage').src = products[idProd].imagen;
+  document.getElementById('modalDescription').innerText = products[idProd].descripcion;
+  document.getElementById('modalPrice').innerText = "$" + products[idProd].precio;
+
+  // Mostramos el modal
+  document.getElementById('pop').style.display = 'block';
+
+  // Mostrar mensaje en la consola (opcional)
+  console.log("Abriendo modal para el producto con idProd:", idProd);
+}
+
+// Función para cerrar el modal
+document.getElementById('closeModalBtn').onclick = function() {
+  document.getElementById('pop').style.display = 'none';
+}
+
+// Cerrar el modal si se hace clic fuera de la ventana del modal
+window.onclick = function(event) {
+  if (event.target == document.getElementById('pop')) {
+      document.getElementById('pop').style.display = 'none';
+  }}
