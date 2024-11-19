@@ -1,0 +1,185 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: rgba(248, 249, 250, 0.25); /* Fondo con algo de transparencia */
+    background-image: url(../images/backgroundcarrito.png);
+    background-size: cover; /* Asegura que la imagen de fondo cubra toda la pantalla */
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el body ocupe toda la altura de la pantalla */
+}
+
+h2, h3 {
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Contenedor principal del carrito */
+.contracolor {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.85); /* Fondo blanco con algo de transparencia */
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    align-items: center;
+}
+
+/* Título principal */
+h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Contenedor para los productos */
+#contenido {
+    display: grid; /* Usamos Grid en lugar de Flexbox */
+    grid-template-columns: repeat(0, 1fr); /* Dos columnas con igual tamaño */
+    gap: 10px; /* Espaciado entre los productos */
+    justify-items: center; /* Centra los productos dentro de cada celda */
+}
+
+/* Estilo de cada producto */
+.col-md-4 {
+    background-color: rgba(255, 255, 255, 0.65); /* Fondo blanco con transparencia */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%; /* Hace que cada producto ocupe el 100% del espacio de su celda */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+h2.totalGeneral {
+    display: block;
+    margin-bottom: 0;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* Efecto hover en cada producto */
+.col-md-4:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.container_main {
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+}
+
+/* Estilo para los títulos dentro de cada producto */
+h3 {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+/* Estilo para el input de cantidad y botones */
+input[type="text"] {
+    width: 50px;
+    text-align: center;
+    padding: 5px;
+    margin: 10px 5px;
+    font-size: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.4); /* Borde con algo de transparencia */
+    border-radius: 5px;
+}
+
+button {
+    padding: 8px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    background-color: #007bff;
+    color: rgba(255, 255, 255, 0.8); /* Texto con algo de transparencia */
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+button#limpiarcarrito {
+    background-color: #dc3545;
+}
+
+button#limpiarcarrito:hover {
+    background-color: #c82333;
+}
+
+button#comprobarcarrito {
+    background-color: #28a745;
+}
+
+button#comprobarcarrito:hover {
+    background-color: #218838;
+}
+
+/* Contenedor de botones al final */
+.botones {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 15px 0;
+}
+
+/* Estilo para el total general */
+h2#totalGeneral {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    background-color: rgba(248, 249, 250, 0.75); /* Fondo transparente más suave */
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para la barra de separación */
+hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    #contenido {
+        grid-template-columns: 1fr; /* En pantallas pequeñas, solo una columna */
+        justify-items: center; /* Centra los productos */
+    }
+
+    .botones {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    button {
+        width: 100%; /* Los botones se harán más anchos en pantallas pequeñas */
+    }
+
+    .col-md-4 {
+        width: 90%; /* Los productos ocuparán el 90% del ancho en pantallas pequeñas */
+    }
+}

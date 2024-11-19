@@ -7,7 +7,7 @@ $id = $_GET['id'];
             $stmt->execute();
             $product = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($product) {
-                echo json_encode($product);
+                echo json_encode($product, JSON_PRETTY_PRINT);
             } else {
                 echo json_encode(['error' => 'Producto no encontrado']);
             }

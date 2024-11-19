@@ -43,11 +43,16 @@ ol, ul {
 	list-style: none;
 }
 
+#Swal {
+	box-sizing: border-box;
+}
+
 #productContainer {
-	display: flex;
+	display:flex;
 	flex-wrap: wrap;
 	flex-direction: row;
-  }
+	justify-content:space-around;
+	  }
   
   .product {
 	min-width: 250px;
@@ -57,12 +62,41 @@ ol, ul {
 	width: calc(25%);
 	box-sizing: border-box;
 	text-align: center;
+	
   }
   
   .product img {
 	width: 200px;
 	height: auto;
+	image-resolution: 200px 200px;
+	
   }
+  .div.product {
+	margin-bottom: 0%;
+
+
+  }
+
+  img#productContainer{
+
+	margin-bottom: 0px;
+	image-rendering: 200px, 200px;
+	
+	  }
+	
+
+  #productContainer{
+
+margin-bottom: 0px;
+  }
+  
+  #formModificarEmpresa {
+	margin-bottom: 0px;
+	width: 50%;
+	margin-left:5%;
+	margin-top:6%
+  }
+
 
 blockquote, q {
 	quotes: none;
@@ -158,11 +192,11 @@ input, select, textarea {
 
 	div p {
 		
-		font-family: "Edu AU VIC WA NT Hand", cursive;
+		font-family:'Courier New', Courier, monospace;
 	}
 	div h1{
 		font-size: 30px;
-		font-family: "Edu AU VIC WA NT Hand", cursive;
+		
 	}
 
 	h1, h2, h3, h4, h5, h6 {
@@ -170,6 +204,7 @@ input, select, textarea {
 		font-weight: 700;
 		line-height: 1em;
 		margin: 0 0 0.5625em 0;
+		font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	}
 
 		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {

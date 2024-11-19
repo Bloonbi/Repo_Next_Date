@@ -5,75 +5,15 @@ const registrarProductoVentana = document.getElementById('registrarProductoVenta
 const nav = document.getElementById('nav');
 const logout = document.getElementById('logout');
 const registerButton = document.getElementById('registerButton');
-const loadProducts = document.getElementById('loadProducts');
+const verProductos = document.getElementById('verProductos');
 const productContainer = document.getElementById('productContainer');
 const paginationContainer = document.getElementById('paginationContainer');
 const añadirProducto = document.getElementById('añadirProducto');
 const modificarDatos = document.getElementById('modificarDatos');
 const formModificarEmpresa = document.getElementById('formModificarEmpresa');
-const vercompras = document.getElementById('vercompras');
-const btn_registrarcliente = document.getElementById('registrarcliente');
-//Funcion editar productos
-
-function ocultarcaja() {
-    formLogin.style.display = "none";
-    logout.style.display = "block";
-    registrarProductoVentana.style.display = "none";
-    titulo.style.display = "none";
-    bienvenido.style.display = "none";
-    nav.style.display = "none";
-    registerButton.style.display = "none";
-    loadProducts.style.display = "none";
-    productContainer.style.display = "none";
-    paginationContainer.style.display = "none";
-    añadirProducto.style.display = "none";
-    modificarDatos.style.display = "none";
-    vercompras.style.display = "none";
-    btn_registrarcliente.style.display = "none";
-    formModificarEmpresa.style.display = "none"
-}
-
-
-//reseteo de la pagina
-document.addEventListener('DOMContentLoaded', function(){
-    //ocultarcaja();
-
-    fetch('./serv_admin/check_sesion.php', {
-        method: 'GET',
-    })
-     .then(response => response.json()) 
-    .then((data) => {
-        if (data.session) {
-            ocultarcaja();
-            nav.style.display='block';
-            registrarProductoVentana.style.display = 'block';
-            btn_registrarcliente.style.display = "block";
-            añadirProducto.className = "active";
-            logout.style.display = 'block';
-            bienvenido.textContent = 'Sesión activa: ' + data.email;
-   
-
-        } else {
-            ocultarcaja();
-            console.log(data)
-            bienvenido.textContent = data.error;
-            titulo.style.display = "block";
-            bienvenido.style.display = "block";
-            nav.style.display = "block";
-            registerButton.style.display = "block";
-            formLogin.style.display = "block";
-                }
-        setupPagination(data.totalPages, data.currentPage);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        bienvenido.textContent = 'Error en el login';
-    })
-
-       
-
-    });
-
+const bienv = document.getElementById('bienv');
+const four = document.getElementById('four');
+const tituloProductos = document.getElementById('tituloProductos')
 
 // login
 document.getElementById('loginButton').addEventListener('click', function() {
@@ -96,7 +36,19 @@ document.getElementById('loginButton').addEventListener('click', function() {
     .then(data => {
         if (data.success) {
             bienvenido.textContent = 'Sesión activa: ' + data.user.email;
-       
+            formLogin.style.display = "none"; 
+            titulo.style.display = "none";
+            logout.style.display = 'block';
+            registrarProductoVentana.style.display = 'block';
+            formModificarEmpresa.style.display = "none";
+            nav.style.display='block';
+
+            añadirProducto.className = "active";
+            modificarDatos.className = "";
+            verProductos.className = "";
+            
+
+            // aviso logueado
             const Toast = Swal.mixin({
                 toast: true,
                 position: "top-end",
@@ -122,18 +74,176 @@ document.getElementById('loginButton').addEventListener('click', function() {
     });
 });
 
-
  //añadir producto
-añadirProducto.addEventListener('click', function(){
+ añadirProducto.addEventListener('click', function(){
 
+    formLogin.style.display = "none"; 
+    titulo.style.display = "none";
     logout.style.display = 'block';
+    productContainer.style.display = 'none';
+    paginationContainer.style.display = 'none';
     registrarProductoVentana.style.display = 'block';
     nav.style.display='block';
-    añadirProducto.classList.add("active");
-    loadProducts.classList.remove('active');
-   
+    formModificarEmpresa.style.display = "none";
+    four.style.display = 'block';
+    bienv.style.display ='block';
+    tituloProductos.style.display ='none';
 
+    añadirProducto.className = "active";
+    modificarDatos.className = "";
+    verProductos.className = "";
+   
 })
+
+
+
+function mdf(){
+    const nombremod = document.getElementById("nombremod");
+    const descripcionmod = document.getElementById("descripcionmod");
+    const direccion = document.getElementById("direccion");
+    const emailmod = document.getElementById("emailmod");
+    const telefono = document.getElementById("telefono");
+    const propietarios = document.getElementById("propietarios");
+    
+    fetch('./serv_admin/obtenerdatosempresa.php')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        nombremod.value=data.nombre;
+        descripcionmod.value=data.descripcion;
+        direccion.value=data.direccion;
+        telefono.value=data.telefono;
+        emailmod.value=data.email;
+        propietarios.value=data.propietarios;
+
+
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Hubo un error con la conexión al servidor.");
+    });
+    
+}
+
+// modificar datos de empresa
+modificarDatos.addEventListener('click', mdf);
+
+    modificarDatos.addEventListener('click', function(){
+
+        formLogin.style.display = "none"; 
+        bienvenido.style.display = "none";
+        titulo.style.display = "none";
+        logout.style.display = 'block';
+        bienv.style.display = 'none';
+        four.style.display = 'none';
+        productContainer.style.display = 'none';
+        paginationContainer.style.display = 'none';
+        registrarProductoVentana.style.display = 'none';
+        nav.style.display='block';
+        añadirProducto.style.display = "block"; 
+        verProductos.style.display = "block";
+        formModificarEmpresa.style.display = "block";
+        
+        modificarDatos.className = "active";
+        añadirProducto.className = "";
+        verProductos.className = "";
+    
+    })
+
+
+document.getElementById("btn_modificarDatos").addEventListener("click", function() {
+    // Capturar los valores del formulario
+    const nombremod = document.getElementById("nombremod").value;
+    const descripcionmod = document.getElementById("descripcionmod").value;
+    const direccion = document.getElementById("direccion").value;
+    const emailmod = document.getElementById("emailmod").value;
+    const telefono = document.getElementById("telefono").value;
+    const propietarios = document.getElementById("propietarios").value;
+    // Crear un objeto con los datos modificados
+    const datosEmpresa = {
+        nombremod: nombremod,
+        descripcionmod: descripcionmod,
+        direccion: direccion,
+        emailmod: emailmod,
+        telefono: telefono,
+        propietarios: propietarios,
+    };
+
+    // Hacer una solicitud POST al servidor para guardar los datos
+    fetch("./serv_admin/modificarempresa.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(datosEmpresa)
+    })
+   .then(response => response.json())
+    .then(data => {
+        console.log(data);
+   
+         // aviso modificar datos de la empresa
+         const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
+          Toast.fire({
+            icon: "success",
+            title: "Datos modificados correctamente!"
+          });
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Hubo un error con la conexión al servidor.");
+    });
+    setTimeout(mdf,2000)
+});
+
+
+//reseteo de la pagina
+document.addEventListener('DOMContentLoaded', function(){
+    console.log('1')
+
+    fetch('./serv_admin/check_sesion.php', {
+        method: 'GET',
+    })
+     .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    }) 
+    .then(data => {
+        if (data.session) {
+            bienvenido.textContent = 'Sesión activa: ' + data.email;
+
+            formLogin.style.display = "none"; 
+            titulo.style.display = "none";
+            logout.style.display = 'block';
+            registrarProductoVentana.style.display = 'block';
+            añadirProducto.className = "active";
+            nav.style.display='block';
+
+        } else {
+            console.log(data)
+            bienvenido.textContent = data.error;
+        }
+        setupPagination(data.totalPages, data.currentPage);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        bienvenido.textContent = 'Error en el login';
+    })
+
+       
+
+    });
 
 
 //registro de producto
@@ -171,7 +281,7 @@ fetch('./serv_admin/agregarproductos.php', {
     // respuesta al grabar producto
     bienvenido.textContent = 'Guardado correctamente';
     document.getElementById('registrarProducto').reset();
-  
+    document.getElementById('formModificarEmpresa');
       } else {
         bienvenido.textContent = data.error;
     }
@@ -182,7 +292,7 @@ fetch('./serv_admin/agregarproductos.php', {
 });
 })
 //Funcion para cargar producto
-function loadProduct(page = 1) {
+function verProducto(page = 1) {
     fetch(`./serv_admin/listar_productos.php?page=${page}`)
     .then(response => response.json())
     .then(data => {
@@ -210,50 +320,14 @@ function loadProduct(page = 1) {
             `;
             productContainer.appendChild(productElement);
             paginationContainer.style.display = "block";
-            loadProducts.className = "active";
+            bienv.style.display = 'none';
+            tituloProductos.style.display = 'block';
+            
+            verProductos.className = "active";
             añadirProducto.classList.remove('active');
            
         });
-//Funcion para eliminar producto
 
-
-//reseteo de la pagina
-/*
-document.addEventListenerDOMContentLoaded('', function(){
-    console.log('2')
-
-    fetch('./serv_admin/check_sesion.php', {
-        method: 'GET',
-    })
-     .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    }) 
-    .then(data => {
-        if (data.session) {
-            bienvenido.textContent = 'Sesión activa: ' + data.admins.email;
-            formLogin.style.display = "none";
-            titulo.style.display = "none";
-            logout.style.display = 'block';
-            registrarProductoVentana.style.display = 'block';
-            nav.style.display='block';
-            añadirProducto.className = "active";
-            loadProducts.classList.remove('active');
-
-        } else {
-            console.log(data)
-            bienvenido.textContent = data.error;
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        bienvenido.textContent = 'Error en el login';
-    });
-
-
-}) */
 
 
 //Comienza codigo para paginacion
@@ -275,62 +349,37 @@ function setupPagination(totalPages, currentPage) {
             pageButton.disabled = true;
         }
         pageButton.addEventListener('click', function() {
-            loadProduct(i);
+            verProducto(i);
         });
         paginationContainer.appendChild(pageButton);
     }
+    
 }
 
-loadProducts.addEventListener('click', function() {
-    ocultarcaja();
+//ver productos
+verProductos.addEventListener('click', function() {
+    registrarProductoVentana.style.display = 'none';
     productContainer.style.display = 'flex';
-    loadProduct();
-   
-});
+    formLogin.style.display = "none"; 
+    bienvenido.style.display = "none";
+    titulo.style.display = "none";
+    logout.style.display = 'block';
+    paginationContainer.style.display = 'block';
+    registrarProductoVentana.style.display = 'none';
+    nav.style.display='block';
+    añadirProducto.style.display = "block"; 
+    verProductos.style.display = "block";
+    formModificarEmpresa.style.display = "none";
+    four.style.display = 'block';
 
-
-
-// logout
-logout.addEventListener('click', function(){
-    fetch('./serv_admin/logout.php', {
-        method: 'POST',
-    })
-    //function handleLogout() {
-        fetch('serv_admin/logout.php')
-        .then(response => response.json())
-        .then(data => {
-            if (!data.session) {
-             formLogin.style.display = 'block';
-             titulo.style.display = "block";
-             window.location.href ="index.html";
-            }
-        })
-        
-        .catch(error => {
-            console.error('Error:', error);
-            bienvenido.textContent = 'Error al cerrar sesión';
-        });
-    //alerta de deslogout
-    //}
-
-    logout.addEventListener('click', logout);
-        
-    const Toast = Swal.mixin({
-       toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 5000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        }
-      });
-      Toast.fire({
-        icon: "success",
-    title: "Sesión cerrada correctamente."
-      });
+    verProductos.className = "active";
+    modificarDatos.className = "";
+    añadirProducto.className = "";
+    verProducto();
 })
+ 
+
+
 //eliminar producto
 window.deleteProduct = function(id) {
     const swalWithBootstrapButtons = Swal.mixin({
@@ -367,7 +416,7 @@ window.deleteProduct = function(id) {
                         "success"
                     );
                     bienvenido.textContent = data.success;
-                    loadProduct();
+                    verProducto();
                 } else {
                     bienvenido.textContent = data.error;
                     console.error("Error:", data.error);
@@ -405,21 +454,21 @@ function editProduct(id) {
         <form id="FormModificar">
               
 
-                <h4>ID:</h4><input id='id' name="idProd" type="text" value= ${id}>
+                <h4>ID:</h4><input id='id' name="idProd" type="text" value="${id}">
                 <br>
-                <h4>Nombre:</h4><input id='nombre' name="nombre" type="text" value= ${data.nombre}>
+                <h4>Nombre:</h4><input id='nombre' name="nombre" type="text" value="${data.nombre}">
                 <br>
-                <h4>Descripcion:</h4> <input id='descripcion' name="descripcion" type="text" value= ${data.descripcion}>
+                <h4>Descripcion:</h4> <input id='descripcion' name="descripcion" type="text" value="${data.descripcion}">
                 <br>
-                <h4>Precio:</h4> <input id='precio' name="precio" type="text" value= ${data.precio}>
+                <h4>Precio:</h4> <input id='precio' name="precio" type="text" value="${data.precio}">
                  <br>
-                <h4>Cantidad:</h4> <input id='cantidad' name="cantidad" type="text" value= ${data.cantidad}>
+                <h4>Cantidad:</h4> <input id='cantidad' name="cantidad" type="text" value="${data.cantidad}">
                 <br>
-                <h4>Promocion:</h4> <input type="text" id='promocion' name="promocion" value= ${data.promocion}>
+                <h4>Promocion:</h4> <input type="text" id='promocion' name="promocion" value="${data.promocion}">
                 <br>
-                <h4>Porcentaje:</h4> <input id='porcentaje' name="porcentaje"  type="text" value= ${data.porcentaje}>
+                <h4>Porcentaje:</h4> <input id='porcentaje' name="porcentaje"  type="text" value="${data.porcentaje}">
                 </div>
-                <button onClick="modificar()" id="modificarProd"> Modificar </button>
+                <button onClick="modificar()" id="modificarProd"> Modificar Producto </button>
               </div>
               <hr>
                
@@ -427,14 +476,19 @@ function editProduct(id) {
               `;
     
         bienvenido.innerHTML = product;
-      })
+        productContainer.style.display = 'none';
+        bienvenido.style.display = "block";
+        tituloProductos.style.display = 'none';
+          })
+
       .catch((error) => {
-        console.error("Error", error);
+        consproductContainer.style.display = 'none';
+        bienvenido.style.display = "block";ole.error("Error", error);
       })
 
 }
 
-//Modificar datos de empresa
+
 function modificar(){
     const FormModificar = document.getElementById("FormModificar")
     const formulario = new FormData(FormModificar)   
@@ -442,86 +496,79 @@ function modificar(){
     fetch("./serv_admin/editar.php", {
         method: 'POST',
         body: formulario
-  
       })
       
-      .then((response) => response.json())
-            
-      .then((data) => { 
-        alert(data.message);
-        console.log(data)
-        loadProduct()
-  
-      })
-      .catch((error) => {
-        console.error("Error", error);
-      })
-      modificarDatos.classList.add("active");
-      loadProducts.classList.remove('active');
-}
-
-function editempresa() {
-    const div = document.getElementById ("formModificar");
-
-
-    fetch("./serv_admin/obtenerempresa.php")
-      .then((response) => response.json())
-         
-      .then((data) => {
-        console.log(data)
-        var product = "";
       
-        product += `
-         <div class="col-md-4">
-                <div class="container_main">
-        <form id="FormModificar">
-              
-                <h4>Nombre:</h4><input id='nombre' name="nombre" type="text" value= ${data.nombre}>
-                <br>
-                <h4>Descripcion:</h4> <input id='descripcion' name="descripcion" type="text" value= ${data.descripcion}>
-                <br>
-                <h4>Telefono:</h4> <input id='telefono' name="telefono" type="text" value= ${data.telefono}>
-                <br>
-                <h4>Email:</h4> <input id='email' name="email" type="text" value= ${data.email}>
-                <br>
-                <h4>Direccion:</h4> <input id='direccion' name="direccion" type="text" value= ${data.direccion}>
-                <br>
-                <h4>Propietarios:</h4> <input id='propietarios' name="propietarios" type="text" value= ${data.propietarios}>
-                <br>
-                
-                </div>
-                <button onClick="modificarempresa()" id="modificarProd"> Modificar </button>
-              </div>
-              <hr>
-               
-              </form>
-              `;
-    
-        bienvenido.innerHTML = product;
-      })
-      .catch((error) => {
-        console.error("Error", error);
-      })
+        verProducto()
+        productContainer.style.display = 'flex';
+        bienvenido.style.display = "none";
 
-}
-
-modificarDatos.addEventListener('click', editempresa);
-
-
-
-function modificarempresa() {
-    const formulario = document.getElementById ("FormModificar");
-    frm = new FormData(formulario);
-
-    fetch("./serv_admin/editarempresa.php", {
-        method: 'POST',
-        body: frm,
+      //Alerta de edicion de producto
+         const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
+          Toast.fire({
+            icon: "success",
+            title: "Producto editado correctamente!"
         })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data)
-        alert(data.message);
+      .catch((error) => {
+        console.error("Error", error);
       })
-    
-    }
-    
+
+}
+
+
+// logout
+logout.addEventListener('click', function(){
+    fetch('./serv_admin/logout.php', {
+        method: 'POST',
+    })
+
+    //function handleLogout() {
+        fetch('serv_admin/logout.php')
+        .then(response => response.json())
+        .then(data => {
+            if (!data.session) {
+             formLogin.style.display = 'block';
+             nav.style.display = 'none';
+             registrarProductoVentana.style.display = 'none';
+             titulo.style.display = "block";
+             productContainer.style.display = 'none';
+             window.location.href ="index.html";
+            }
+        })
+        
+        .catch(error => {
+            console.error('Error:', error);
+            bienvenido.textContent = 'Error al cerrar sesión';
+        });
+
+    //alerta de deslogout
+    //}
+
+    logout.addEventListener('click', logout);
+        
+    const Toast = Swal.mixin({
+       toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 5000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+    title: "Sesión cerrada correctamente."
+      });
+})

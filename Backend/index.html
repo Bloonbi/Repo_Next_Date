@@ -21,15 +21,12 @@
 					<h1 id="logo"><a href="#">Cafetería Imperial</a></h1>
 					<p>En nuestra cafetería queremos que sientas el sabor del café grano a grano<br /> </p>
 				</header>
-				<nav id="nav">
+				<nav id="nav" style="display: none";>
 					<ul>		
-						<li><a id="registrarcliente">Registrar Cliente</a></li>
-						<li><a id="modificarDatos">Modificar datos de empresa</a></li>
-						<li><a id="loadProducts">Ver productos</a></li>
 						<li><a id="añadirProducto">Añadir Producto</a></li>
-						<li><a id="vercompras">Ver Compras</a></li>
+						<li><a id="verProductos">Ver productos</a></li>
+						<li><a id="modificarDatos">Modificar datos de empresa</a></li>
 						<li><a id="logout">Logout</a></li>
-						
 					</ul>
 				</nav>
 				<footer>
@@ -42,13 +39,15 @@
 
 				<!-- Main -->
 					<div id="main">
-			
+
+				
 						<!-- Four -->
 							<section id="four">
 								<div class="container">
 									<div id="bienvenido"></div>
 									<br>
-									<h1>Bienvenidos al administrador de Cafeteria Imperial</h1>
+									<h1 id="bienv">Bienvenidos al administrador de Cafeteria Imperial</h1>
+									<h1 id="tituloProductos" style="display: none;">Productos</h1>
 									<br>
 									<br>
 									<h3 id="titulo">Login</h3>
@@ -70,7 +69,7 @@
 									</div>
 
 									<!-- formulario de registro --> 								
-									<div id="registrarProductoVentana">
+									<div id="registrarProductoVentana" style="display:none";>
 									<h3>Añadir Producto</h3>
 									<form id="registrarProducto" enctype="multipart/form-data">
 
@@ -95,34 +94,42 @@
 								</div>
 								</div>
 								<!-- Muestra productos -->
-								<div id="productContainer"> </div>
+								<div id="productContainer"></div>
 
 									<!-- Paginacion-->
 								<div id="paginationContainer"> </div>
 							</section>
-							<div id="formModificarEmpresa">
-								<h1>Modificar datos de empresa</h1>
-								<label for="nombre">Nombre:</label><br>
+							<div id="formModificarEmpresa" style="display:none";>
+								<h1>Información de la empresa</h1>
+								<label for="nombremod">Nombre:</label><br>
 								<input type="text" id="nombremod" name="nombremod" required><br>
 			
-								<label for="descripcion">Descripción:</label><br>
+								<label for="descripcionmod">Descripción:</label><br>
 								<input type="text" id="descripcionmod" name="descripcionmod"><br>
 			
-								<label for="precio">Precio:</label><br>
-								<input type="number" id="precio" name="precio" required><br>
+								<label for="direccion">Dirección:</label><br>
+								<input type="text" id="direccion" name="direccion" required><br>
 			
-								<label for="cantidad">Cantidad:</label><br>
-								<input type="number" id="cantidad" name="cantidad" required><br>
+								<label for="emailmod">Correo électronico:</label><br>
+								<input type="text" id="emailmod" name="emailmod" required><br>
+
+								<label for="telefono"> Telefono:</label><br>
+								<input type="text" id="telefono" name="telefono" required><br>
+
+								<label for="propietarios"> Propietarios:</label><br>
+								<input type="text" id="propietarios" name="propietarios" required><br>
 			
-								<input class="boton" type="submit" value="Modificar Producto">
+								<input class="boton" id="btn_modificarDatos" type="submit" value="Modificar dato">
 								</form>
-						</div>
+							</div>
 
 						<div id="formModificar">
 
 
 							
 						</div>
+						
+
 					</div>
 
 				<!-- Footer -->

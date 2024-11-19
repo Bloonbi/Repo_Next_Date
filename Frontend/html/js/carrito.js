@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       // Añadir el total general al final
-      prod += `<h2>Total General: ${totalGeneral}</h2>`;
+      prod += `<h2 class="totalGeneral">Total General: ${totalGeneral}</h2>`;
       
       div.innerHTML = prod;
 
