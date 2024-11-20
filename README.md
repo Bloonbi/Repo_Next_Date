@@ -1,1 +1,1 @@
-Este codigo debe ir en la carpeta HTDOCS de XAMPP y por un tema de direcciones absolutas se debe dejar el orden de carpetas como ya está aqui.
+Este codigo debe ir en la carpeta HTDOCS de XAMPP y por un tema de direcciones absolutas se debe cambiar el nombre de "Frontend" a "cafeteria" y de "Backend" a "cafee"
